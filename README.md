@@ -20,7 +20,7 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->Mental Suffering: You&#x27;re holding something down that&#x27;s trying to move!<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->Ask yourself: why is it that when you pluck a guitar string it sounds louder if it is connected to a guitar?<!--QUOTE_TEXT_END--></i></p>
 <p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
