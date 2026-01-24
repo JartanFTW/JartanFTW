@@ -1,0 +1,38 @@
+name: Update Daily Quote
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # daily at midnight UTC
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+
+      - name: Insert random quote
+        run: |
+          QUOTE=$(jq -r '.[] | @base64' quotes.json | shuf -n 1)
+          TEXT=$(echo "$QUOTE" | base64 --decode | jq -r '.text')
+          AUTHOR=$(echo "$QUOTE" | base64 --decode | jq -r '.author')
+
+          # Escape sed-sensitive characters
+          TEXT_ESC=$(printf '%s\n' "$TEXT" | sed 's/[\/&]/\\&/g')
+          AUTHOR_ESC=$(printf '%s\n' "$AUTHOR" | sed 's/[\/&]/\\&/g')
+
+          sed -i "s|<!--QUOTE_TEXT-->|$TEXT_ESC|g" README.md
+          sed -i "s|<!--QUOTE_AUTHOR-->|— $AUTHOR_ESC|g" README.md
+
+      - name: Commit README
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Update quote of the day" || exit 0
+          git push
