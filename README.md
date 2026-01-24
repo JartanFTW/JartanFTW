@@ -18,7 +18,7 @@
 
 ---
 
-<h3 align="center">🌐 Socials</h3>
+<h3 align="center">🌐 Socials 🌐</h3>
 
 <p align="center">
   <a href="https://www.linkedin.com/in/jonathan-carter-691308371">
@@ -34,7 +34,7 @@
 
 ---
 
-<h3 align="center">💻 Tools I Love</h3>
+<h3 align="center">💻 Tools I Love 💻</h3>
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"/>
@@ -52,7 +52,7 @@
 
 ---
 
-<h3 align="center">📊 GitHub Stats</h3>
+<h3 align="center">📊 GitHub Stats 📊</h3>
 
 <p align="center">
   <img src="./profile/streak.svg" alt="GitHub Streak" />
