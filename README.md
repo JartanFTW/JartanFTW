@@ -102,6 +102,7 @@
 <h3 align="center">🌟 Fun Facts About Me 🌟</h3>
 
 <p align="center">• I've been programming asynchronous code since I was 11.</p>
+<p align="center">• I build and work in <a href="https://github.com/devcontainers/">devcontainers</a> for clean reproducibility and effortless onboarding.</p>
 <p align="center">...more to come as I think about it</p>
 
 
