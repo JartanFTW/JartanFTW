@@ -2,7 +2,7 @@ name: Update Daily Quote
 
 on:
   schedule:
-    - cron: "0 0 * * *" # daily at midnight UTC
+    - cron: "0 0 * * *" # Daily at midnight UTC
   workflow_dispatch:
 
 jobs:
@@ -22,12 +22,24 @@ jobs:
           TEXT=$(echo "$QUOTE" | base64 --decode | jq -r '.text')
           AUTHOR=$(echo "$QUOTE" | base64 --decode | jq -r '.author')
 
-          # Escape sed-sensitive characters
-          TEXT_ESC=$(printf '%s\n' "$TEXT" | sed 's/[\/&]/\\&/g')
-          AUTHOR_ESC=$(printf '%s\n' "$AUTHOR" | sed 's/[\/&]/\\&/g')
+          export TEXT AUTHOR
 
-          sed -i "s|<!--QUOTE_TEXT-->|$TEXT_ESC|g" README.md
-          sed -i "s|<!--QUOTE_AUTHOR-->|— $AUTHOR_ESC|g" README.md
+          # Escape HTML special characters to keep README safe
+          TEXT_ESC=$(python3 - << 'PY'
+          import html, os
+          print(html.escape(os.environ["TEXT"]))
+          PY
+                    )
+          
+                    AUTHOR_ESC=$(python3 - << 'PY'
+          import html, os
+          print(html.escape(os.environ["AUTHOR"]))
+          PY
+                    )
+
+          # Replace content BETWEEN persistent markers
+          perl -0777 -i -pe 's/(<!--QUOTE_TEXT_START-->).*?(<!--QUOTE_TEXT_END-->)/$1'"$TEXT_ESC"'$2/sg' README.md
+          perl -0777 -i -pe 's/(<!--QUOTE_AUTHOR_START-->).*?(<!--QUOTE_AUTHOR_END-->)/$1— '"$AUTHOR_ESC"'$2/sg' README.md
 
       - name: Commit README
         run: |
