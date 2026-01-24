@@ -52,8 +52,6 @@
 
 ---
 
-<h3 align="center">📊 GitHub Stats 📊</h3>
-
 <p align="center">
   <img src="./profile/streak.svg" alt="GitHub Streak" />
 </p>
