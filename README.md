@@ -1,15 +1,19 @@
-<h1 align="center">Hiya! I'm Jonathan ✨</h1>
+<h1 align="center">✨ Hiya! I'm Jonathan ✨</h1>
 
 <p align="center">
-💼 I work in networking, as a hypnotherapist, and of course, a programmer!
+💼 I work in networking, as a hypnotherapist, and of course, a programmer! 💼
 </p>
 
 <p align="center">
-😍 I'm obsessed with efficient program architecture, flexible design, and dynamic systems.
+🎓 I hold a BS in Organizational Psychology and a BS in Information Technology. 🎓
 </p>
 
 <p align="center">
-🔧 I'm currently working on <b>Merlin</b>, a private modular website system for contract website development.
+😍 I'm obsessed with efficient program architecture, flexible design, and dynamic systems. 😍
+</p>
+
+<p align="center">
+🔧 I'm currently working on <b>Merlin</b> — a private modular website system for contract-based web development. 🔧
 </p>
 
 ---
