@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-🔧 I'm currently working on <b>Merlin</b> — a private modular website system for contract-based web development. 🔧
+🔧 I'm currently working on <b>Merlin</b> — a private modular website system for contract-based full-stack development. 🔧
 </p>
 
 ---
