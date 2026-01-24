@@ -34,6 +34,9 @@
   <a href="https://discord.com/users/511608939477991425">
     <img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"/>
   </a>
+  <a href="https://www.instagram.com/jonathan.builds">
+    <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white"/>
+  </a>
   <a href="https://open.spotify.com/user/bqci2w4gjaumv3zbragif87fv?si=a14aff15e550412f">
     <img src="https://img.shields.io/badge/Spotify-1ED760?style=for-the-badge&logo=spotify&logoColor=white"/>
   </a>
