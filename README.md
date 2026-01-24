@@ -18,6 +18,13 @@
 
 ---
 
+<h3 align="center">📜 Quote of the Day 📜 </h3>
+
+<p align="center"><i><!--QUOTE_TEXT--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR--></sub></p>
+
+---
+
 <h3 align="center">🌐 Socials 🌐</h3>
 
 <p align="center">
