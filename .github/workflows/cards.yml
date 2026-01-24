@@ -34,12 +34,9 @@ jobs:
           token: ${{ secrets.PAT }}
 
       - name: Generate streak card
-        uses: readme-tools/github-readme-stats-action@v1
-        with:
-          card: streak
-          options: username=${{ github.repository_owner }}&theme=darcula
-          path: profile/streak.svg
-          token: ${{ secrets.PAT }}
+        run: |
+          curl -L "https://streak-stats.demolab.com/?user=${{ github.repository_owner }}&theme=darcula" \
+            -o profile/streak.svg
 
       - name: Commit cards
         run: |
