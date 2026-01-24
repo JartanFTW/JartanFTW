@@ -1,7 +1,7 @@
 <h1 align="center">Hiya! I'm Jonathan ✨</h1>
 
 <p align="center">
-I work in networking, as a hypnotherapist, and of course, a programmer!
+💼 I work in networking, as a hypnotherapist, and of course, a programmer!
 </p>
 
 <p align="center">
