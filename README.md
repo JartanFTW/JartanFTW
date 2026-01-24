@@ -24,7 +24,7 @@
   <a href="https://www.linkedin.com/in/jonathan-carter-691308371">
     <img src="https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin-white&logoColor=fff"/>
   </a>
-  <a href="http://discord.com/users/511608939477991425">
+  <a href="https://discord.com/users/511608939477991425">
     <img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"/>
   </a>
   <a href="https://open.spotify.com/user/bqci2w4gjaumv3zbragif87fv?si=a14aff15e550412f">
