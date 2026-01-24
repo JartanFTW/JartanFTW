@@ -98,11 +98,8 @@
 
 <h3 align="center">🌟 Fun Facts About Me 🌟</h3>
 
-<ul>
-  <li>I've been programming asynchronous code since I was 11.</li>
-</ul>
-
-<p><i>...more to come as I think about it</i></p>
+<p align="center">• I've been programming asynchronous code since I was 11.</p>
+<p align="center">...more to come as I think about it</p>
 
 
 <!--
