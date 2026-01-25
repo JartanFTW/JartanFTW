@@ -2,7 +2,7 @@ name: Update Daily Quote
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Daily at midnight UTC
+    - cron: "11 6 * * *" # Daily at 1:11 AM Eastern Time (06:11 UTC)
   workflow_dispatch:
 
 jobs:
