@@ -25,25 +25,6 @@
 
 ---
 
-<h3 align="center">🌐 Socials 🌐</h3>
-
-<p align="center">
-  <a href="https://www.linkedin.com/in/jonathan-carter-691308371">
-    <img src="https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin-white&logoColor=fff"/>
-  </a>
-  <a href="https://discord.com/users/511608939477991425">
-    <img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"/>
-  </a>
-  <a href="https://www.instagram.com/jonathan.builds">
-    <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white"/>
-  </a>
-  <a href="https://open.spotify.com/user/bqci2w4gjaumv3zbragif87fv?si=a14aff15e550412f">
-    <img src="https://img.shields.io/badge/Spotify-1ED760?style=for-the-badge&logo=spotify&logoColor=white"/>
-  </a>
-</p>
-
----
-
 <h3 align="center">💻 Tools I Love 💻</h3>
 
 <p align="center">
@@ -82,6 +63,24 @@
   </a>
 </p>
 
+---
+
+<h3 align="center">🌐 Socials 🌐</h3>
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/jonathan-carter-691308371">
+    <img src="https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin-white&logoColor=fff"/>
+  </a>
+  <a href="https://discord.com/users/511608939477991425">
+    <img src="https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white"/>
+  </a>
+  <a href="https://www.instagram.com/jonathan.builds">
+    <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white"/>
+  </a>
+  <a href="https://open.spotify.com/user/bqci2w4gjaumv3zbragif87fv?si=a14aff15e550412f">
+    <img src="https://img.shields.io/badge/Spotify-1ED760?style=for-the-badge&logo=spotify&logoColor=white"/>
+  </a>
+</p>
 
 ---
 
