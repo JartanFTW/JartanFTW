@@ -20,8 +20,11 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->What you need most is always to be found where you least wish to look.<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Carl Jung<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->When a fool hates a man that has no hate,
+Is purified and free from every blemish,
+Such evil he will find comes back on him,
+As does fine dust thrown up against the wind<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Dhammapada<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
