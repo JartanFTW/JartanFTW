@@ -20,15 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->Father forgive us
-for what we must do,
-you forgive us,
-we&#x27;ll forgive you.
-We&#x27;ll forgive each other
-&#x27;till we both turn blue,
-then we&#x27;ll whistle and go fishing
-in heaven.<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— John Prine (Fish and Whistle)<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->Freedom is what you do with what&#x27;s been done to you.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jean-Paul Sartre<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
