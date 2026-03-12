@@ -20,8 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->Loneliness is solved by realizing there is nobody but you.<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->There are two kinds of beings, the embodied and unembodied, in whom there is the mortal and the divine spirit. Man is left to choose one or the other, if he so wishes. For one cannot choose both at once; when one is diminished, it reveals the power of the other.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Hermes Trismegistus, Corpus Hermeticum Book IV<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
