@@ -20,7 +20,7 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->The way out of the labyrinth is to follow the thread of one&#x27;s soul.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->As long as you look there will be something to find. There is no end to the exhaustion of duality. It&#x27;s an obsession, of sorts, to find something dual so as to make it nondual. Ironic.<!--QUOTE_TEXT_END--></i></p>
 <p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
