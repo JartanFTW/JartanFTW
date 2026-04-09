@@ -20,7 +20,7 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->Hatred strengthens that which we hate.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->There is no death, only a change of state.<!--QUOTE_TEXT_END--></i></p>
 <p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
