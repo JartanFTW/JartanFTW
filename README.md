@@ -20,13 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->I can&#x27;t wait to master patience.
-I’m waiting to master patience.
-Patience refined becomes determination.
-Determination refined becomes resolve.
-Resolve dying becomes suspension.
-Resolve relaxed becomes perfected.<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->During periods of great stress, words that seem immaterial or are uttered in jest might become fixed in the patient&#x27;s mind and cause untold harm.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— American Academy of Orthopedic Surgeons<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
