@@ -1,11 +1,11 @@
 <h1 align="center">✨ Hiya! I'm Jonathan ✨</h1>
 
 <p align="center">
-💼 I work as a project manager, as a hypnotherapist, and of course, a programmer! 💼
+🎓 I hold a BS in Organizational Psychology and a BS in Information Technology. 🎓
 </p>
 
 <p align="center">
-🎓 I hold a BS in Organizational Psychology and a BS in Information Technology. 🎓
+💼 I work as a project manager, as a hypnotherapist, and of course, a programmer! 💼
 </p>
 
 <p align="center">
