@@ -20,8 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->All great sin archetypes can be seen as different perceptual distortions of the same underlying fixation upon unified awareness<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->During periods of great stress, words that seem immaterial or are uttered in jest might become fixed in the patient&#x27;s mind and cause untold harm.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— American Academy of Orthopedic Surgeons<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
