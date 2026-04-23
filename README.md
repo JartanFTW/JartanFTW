@@ -20,7 +20,7 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->Trauma appears as a belief that peace can be absent under circumstances.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->The way out of the labyrinth is to follow the thread of one&#x27;s soul.<!--QUOTE_TEXT_END--></i></p>
 <p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
