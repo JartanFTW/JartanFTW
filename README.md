@@ -20,8 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->All I&#x27;ve ever wanted is for someone to lie with me and to want nothing more than that. That alone has been the objective of everything I&#x27;ve ever chosen.<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->During periods of great stress, words that seem immaterial or are uttered in jest might become fixed in the patient&#x27;s mind and cause untold harm.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— American Academy of Orthopedic Surgeons<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
