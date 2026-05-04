@@ -20,8 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->During periods of great stress, words that seem immaterial or are uttered in jest might become fixed in the patient&#x27;s mind and cause untold harm.<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— American Academy of Orthopedic Surgeons<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->What you need most is always to be found where you least wish to look.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Carl Jung<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
