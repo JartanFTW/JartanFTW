@@ -20,8 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->You do not find revelation. You grow into it.<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->During fright, a particular image held in the mind will bring about a particular effect.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Hermes<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
