@@ -20,7 +20,7 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->What makes my life meaningful independent of another person?<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->Ideas of past, present, and future arise. There is only the me-now, for now.<!--QUOTE_TEXT_END--></i></p>
 <p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
