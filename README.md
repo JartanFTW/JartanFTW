@@ -20,8 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->There is no future without expectation.<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->When speaking of psychotherapy: its whole function, in the end, is to help the patient deal with one fundamental error; the belief that anger brings him something he really wants, and that by justifying attack he is protecting himself.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Psychotherapy supplemental material for ACIM<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
