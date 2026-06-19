@@ -20,8 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->The wound is the place where the Light enters you.<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Rumi<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->In A Course in Miracles it teaches that the one fundamental error that every patient walks into a therapy office with is the belief that anger brings him or her something that they want and that by justifying attack they are protecting themselves. To the extent to which they are willing to let that go, to that extent they are truly healed.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Matthew Brownstein<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
