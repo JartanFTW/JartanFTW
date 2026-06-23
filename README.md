@@ -20,8 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->Ask yourself: why is it that when you pluck a guitar string it sounds louder if it is connected to a guitar? It is not, as many would think, that the resonance box amplifies the sound — for where would the extra energy come from? Rather, the energy is the same; what changes is the speed at which it is discharged.<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Andrés Gómez-Emilsson<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->What you seek is seeking you.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Rumi<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
