@@ -9,7 +9,7 @@
         aria-labelledby="descId"
       >
         <title id="titleId">Jonathan Carter's GitHub Stats, Rank: A-</title>
-        <desc id="descId">Total Stars Earned: 29, Total Commits  (last year) : 490, Total PRs: 258, Total Issues: 340, Contributed to (last year): 21</desc>
+        <desc id="descId">Total Stars Earned: 29, Total Commits  (last year) : 497, Total PRs: 265, Total Issues: 345, Contributed to (last year): 22</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -73,7 +73,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 74.33708745095397;
+        stroke-dashoffset: 73.96740473450056;
       }
     }
   
@@ -177,7 +177,7 @@
         x="219.01"
         y="12.5"
         data-testid="commits"
-      >490</text>
+      >497</text>
     </g>
   </g><g transform="translate(0, 50)">
     <g class="stagger" style="animation-delay: 750ms" transform="translate(25, 0)">
@@ -192,7 +192,7 @@
         x="219.01"
         y="12.5"
         data-testid="prs"
-      >258</text>
+      >265</text>
     </g>
   </g><g transform="translate(0, 75)">
     <g class="stagger" style="animation-delay: 900ms" transform="translate(25, 0)">
@@ -207,7 +207,7 @@
         x="219.01"
         y="12.5"
         data-testid="issues"
-      >340</text>
+      >345</text>
     </g>
   </g><g transform="translate(0, 100)">
     <g class="stagger" style="animation-delay: 1050ms" transform="translate(25, 0)">
@@ -222,7 +222,7 @@
         x="219.01"
         y="12.5"
         data-testid="contribs"
-      >21</text>
+      >22</text>
     </g>
   </g>
     </svg>
