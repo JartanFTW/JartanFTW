@@ -100,8 +100,8 @@
 
 <h3 align="center">🌟 Fun Facts About Me 🌟</h3>
 
-<p align="center">My first language was Windows Batch. My first program was a lemonade-stand market simulator; now I run a trading-automation company.</p>
-<p align="center">I truly learnt programming by dropping myself into the deep end of async Python at 13 years old and never stopping.</p>
+<p align="center">• My first language was Windows Batch. My first program was a lemonade-stand market simulator; now I run a trading-automation company.</p>
+<p align="center">• I truly learnt programming by dropping myself into the deep end of async Python at 13 years old and never stopping.</p>
 <p align="center">• I build and work in <a href="https://github.com/devcontainers/">devcontainers</a> for clean reproducibility and effortless onboarding.</p>
 <p align="center">...more to come as I think about it</p>
 
