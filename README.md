@@ -1,4 +1,4 @@
-<h1 align="center">✨ Hiya! I'm Jonathan ✨</h1>
+<h1 align="center">✨ Hi! I'm Jonathan ✨</h1>
 
 <p align="center">
 🎓 I hold a BS in Organizational Psychology and a BS in Information Technology. 🎓
@@ -68,7 +68,7 @@
 <h3 align="center">🌐 Socials 🌐</h3>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/jonathan-carter-691308371">
+  <a href="https://www.linkedin.com/in/jonathanbuilds">
     <img src="https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin-white&logoColor=fff"/>
   </a>
   <a href="https://discord.com/users/511608939477991425">
@@ -100,7 +100,8 @@
 
 <h3 align="center">🌟 Fun Facts About Me 🌟</h3>
 
-<p align="center">• I've been programming asynchronous code since I was 11.</p>
+<p align="center">My first language was Windows Batch. My first program was a lemonade-stand market simulator; now I run a trading-automation company.</p>
+<p align="center">I truly learnt programming by dropping myself into the deep end of async Python at 13 years old and never stopping.</p>
 <p align="center">• I build and work in <a href="https://github.com/devcontainers/">devcontainers</a> for clean reproducibility and effortless onboarding.</p>
 <p align="center">...more to come as I think about it</p>
 
