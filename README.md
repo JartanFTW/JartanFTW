@@ -20,8 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->There is no death, only a change of state.<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->If you are angry now, you will be one who does not carry out the Blessed One’s teaching; by repaying an angry man in kind you will be worse than the angry man and not win the battle hard to win; you will yourself do to yourself the things that help your enemy; and you will be like a pyre log.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Aṅguttara Nikāya 7.60 (AN 7.60)<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
