@@ -20,8 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->The wound is the place where the Light enters you.<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Rumi<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->Where there is anger there is always pain underneath.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Eckhart Tolle<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
