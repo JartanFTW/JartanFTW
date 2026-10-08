@@ -74,9 +74,9 @@ Footer styles: `muted` (default), `fg`, `string`, `success`.
 `[style]` keys: `leather`, `leather-edge`, `cover`, `parchment`, `parchment-edge`,
 `page-stack`, `ink`, `ink-faded`, `rubric`, `gold`, `sigil-size`.
 
-### recall, recall-constellation, constellation, index-cards, devices, matrix, chart, terminal, gauge, gem-grid, gem-log, gem-ladder
+### recall, recall-constellation, constellation, index-cards, devices, matrix, chart, terminal, gauge, gem-grid, gem-log, gem-ladder, trade-themes, notifications
 
-Twelve layouts that share a dark text column on the left: owner, name with
+Fourteen layouts that share a dark text column on the left: owner, name with
 `name_accent` in a gradient, headline, description and footer. Each draws something
 different on the right.
 
@@ -122,6 +122,12 @@ different on the right.
   targeted ones lit and a caption naming them; gem-log reads `bases`, a list of gem
   lists, and skips bases until one holds a targeted gem; gem-ladder climbs tiers 1-8
   of `ladder_colour` (default `p`).
+- **trade-themes** draws one `trade` in up to three `themes`, fanned with the last in
+  front. A trade is `{ status, partner, give, receive }`, each side `{ total, items }`
+  with up to four `{ icon, value }` items; a theme is `{ label, card, box, edge, ink,
+  muted, value }`, its colours as CSS values.
+- **notifications** stacks up to three phone-style alerts, each `{ icon, app, time,
+  title, body }`.
 
 The two constellation layouts scatter their stars from a fixed `seed` (a whole
 number), so a render is repeatable; set it in the content file to try another

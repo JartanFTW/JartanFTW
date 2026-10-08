@@ -1,0 +1,65 @@
+{% extends "_split.html" %}
+{% from "_macros.html" import glyph %}
+{# trade-themes layout: one trade drawn in several themes, fanned out, the last in front.
+   Fields are in ../README.md #}
+
+{% block style %}
+  .fan { position: absolute; left: 628px; top: 40px; width: 600px; height: 560px; }
+  .trade {
+    position: absolute;
+    width: 392px;
+    padding: 16px 20px 18px;
+    border-radius: 14px;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--edge);
+    box-shadow: 0 16px 40px rgb(0 0 0 / 55%);
+  }
+  /* back cards stay inside the 72px edge that social sites crop */
+  .trade:nth-child(1) { left: 4px; top: 34px; transform: rotate(-7deg); }
+  .trade:nth-child(2) { left: 166px; top: 54px; transform: rotate(5deg); }
+  .trade:last-child { left: 104px; top: 214px; transform: none; }
+  .theme {
+    position: absolute;
+    top: -32px;
+    left: 14px;
+    padding: 3px 12px;
+    border-radius: 8px 8px 0 0;
+    font: bold 15px "DejaVu Sans Mono", monospace;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--edge);
+    border-bottom: none;
+  }
+  .head { display: flex; justify-content: space-between; align-items: baseline; font: bold 22px "Noto Sans", sans-serif; }
+  .head .done { color: var(--success); }
+  .partner { font: 16px "Noto Sans", sans-serif; color: var(--muted); margin-top: 2px; }
+  .side { display: flex; justify-content: space-between; margin: 12px 0 6px; font: 15px "DejaVu Sans Mono", monospace; color: var(--muted); }
+  .items { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .box { height: 64px; display: grid; place-items: center; border-radius: 10px; background: var(--box); border: 1px solid var(--edge); }
+  .box .glyph { color: var(--ink); }
+  .value { margin-top: 4px; text-align: center; white-space: nowrap; font: 13px "DejaVu Sans Mono", monospace; color: var(--value); }
+{% endblock %}
+
+{% macro side(label, half) -%}
+  <div class="side"><span>{{ label }}</span><span>{{ half.total }}</span></div>
+  <div class="items">
+    {% for item in (half['items'] or [])[:4] %}  {#- not half.items: that's dict.items() #}<div><div class="box">{% if item.icon %}{{ glyph(item.icon, 32) }}{% endif %}</div><div class="value">{{ item.value }}</div></div>{% endfor %}
+  </div>
+{%- endmacro %}
+
+{% block art %}
+  {% if trade %}
+  <div class="fan">
+    {% for theme in (themes or [{}])[-3:] %}
+    <div class="trade" style="--card: {{ theme.card }}; --box: {{ theme.box }}; --edge: {{ theme.edge }}; --ink: {{ theme.ink }}; --muted: {{ theme.muted }}; --value: {{ theme.value }}">
+      {% if theme.label %}<div class="theme">{{ theme.label }}</div>{% endif %}
+      <div class="head"><span>{{ trade.status }}</span><span class="done">✓</span></div>
+      {% if trade.partner %}<div class="partner">{{ trade.partner }}</div>{% endif %}
+      {{ side("You give", trade.give) }}
+      {{ side("You receive", trade.receive) }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endblock %}

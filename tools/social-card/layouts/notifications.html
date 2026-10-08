@@ -1,0 +1,59 @@
+{% extends "_split.html" %}
+{% from "_macros.html" import glyph %}
+{# notifications layout: up to three phone-style alerts, staggered. Fields are in
+   ../README.md #}
+
+{% block style %}
+  .stack {
+    position: absolute;
+    left: 640px;
+    top: 40px;
+    width: 576px;
+    height: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+  }
+  .alert {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 16px;
+    width: 528px;
+    padding: 20px 22px;
+    border-radius: 22px;
+    background: rgb(40 44 52 / 92%);
+    border: 1px solid #3a3f4b;
+    box-shadow: 0 12px 30px rgb(0 0 0 / 45%);
+  }
+  .alert:nth-child(2) { margin-left: 24px; }
+  .alert:nth-child(3) { margin-left: 48px; }
+  .alert .badge {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    color: var(--fg);
+    background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+  }
+  .alert .top { display: flex; justify-content: space-between; font: 17px "Noto Sans", sans-serif; color: var(--muted); }
+  .alert .top b { color: var(--fg); }
+  .alert .title { font: bold 23px "Noto Sans", sans-serif; margin-top: 2px; }
+  .alert .body { font: 19px "Noto Sans", sans-serif; color: var(--muted); }
+{% endblock %}
+
+{% block art %}
+  <div class="stack">
+    {% for alert in (notifications or [])[:3] %}
+    <div class="alert">
+      <div class="badge">{% if alert.icon %}{{ glyph(alert.icon, 28) }}{% endif %}</div>
+      <div>
+        <div class="top"><b>{{ alert.app }}</b><span>{{ alert.time }}</span></div>
+        <div class="title">{{ alert.title }}</div>
+        {% if alert.body %}<div class="body">{{ alert.body }}</div>{% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}
