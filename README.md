@@ -102,11 +102,11 @@ As does fine dust thrown up against the wind<!--QUOTE_TEXT_END--></i></p>
 
 <p align="center">
   <a href="https://github.com/Jartan-LLC/scaffold"><img src="https://repository-images.githubusercontent.com/1268717504/ded337ea-d38a-4c86-8c4a-c1b03635a589" width="48%" alt="scaffold"/></a>
-  <a href="https://github.com/Jartan-LLC/grimoire"><img src="https://opengraph.githubassets.com/1/Jartan-LLC/grimoire" width="48%" alt="grimoire"/></a>
   <a href="https://github.com/Jartan-LLC/enchantments"><img src="https://repository-images.githubusercontent.com/1396627351/48408172-719e-413c-84ef-c2132c5ee510" width="48%" alt="enchantments"/></a>
+  <a href="https://github.com/Jartan-LLC/grimoire"><img src="https://opengraph.githubassets.com/1/Jartan-LLC/grimoire" width="48%" alt="grimoire"/></a>
+  <a href="https://github.com/Jartan-LLC/claude-sync"><img src="https://opengraph.githubassets.com/1/Jartan-LLC/claude-sync" width="48%" alt="claude-sync"/></a>
   <a href="https://github.com/Jartan-LLC/memcp"><img src="https://opengraph.githubassets.com/1/Jartan-LLC/memcp" width="48%" alt="memcp"/></a>
   <a href="https://github.com/Jartan-LLC/sonde"><img src="https://opengraph.githubassets.com/1/Jartan-LLC/sonde" width="48%" alt="sonde"/></a>
-  <a href="https://github.com/Jartan-LLC/claude-sync"><img src="https://opengraph.githubassets.com/1/Jartan-LLC/claude-sync" width="48%" alt="claude-sync"/></a>
   <a href="https://github.com/JartanFTW/Trade-Notifier"><img src="https://opengraph.githubassets.com/1/JartanFTW/Trade-Notifier" width="48%" alt="Trade-Notifier"/></a>
   <a href="https://github.com/JartanFTW/kot-skipper"><img src="https://opengraph.githubassets.com/1/JartanFTW/kot-skipper" width="48%" alt="kot-skipper"/></a>
 </p>
