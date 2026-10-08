@@ -1,0 +1,10 @@
+owner = "JartanFTW"
+name = "Trade-Notifier"
+headline = "Know the moment a Roblox trade lands"
+description = "Sends a Discord webhook whenever you complete,\nreceive or send a trade."
+chips = ["Discord webhooks", "Custom themes", "Runtime-built images", "Windows & Linux"]
+icon = "Trade-Notifier.svg"  # Pinhead Map Icons, CC0
+
+[style]
+tile-from = "#1a7f37"
+tile-to = "#1b7c83"

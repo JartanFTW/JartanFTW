@@ -1,0 +1,13 @@
+owner = "Jartan-LLC"
+name = "sonde"
+headline = "Find an API's real rate limit"
+description = "Probes any HTTP API for its rate limits, burst ceiling\nand full-scrape time. Safe by default."
+chips = ["Sanity", "Sequential", "Burst", "Sweep", "Estimate"]
+footer = [
+  { text = "$ sonde github-stargazers --owner Jartan-LLC --repo sonde" },
+]
+icon = "sonde.svg"  # Pinhead Map Icons, CC0
+
+[style]
+tile-from = "#1b7c83"
+tile-to = "#0969da"

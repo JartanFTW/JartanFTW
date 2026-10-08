@@ -1,0 +1,14 @@
+owner = "Jartan-LLC"
+name = "memcp"
+headline = "Give your AI a memory"
+description = "A backend-agnostic, multi-tenant MCP memory server.\nAny client. Any backend."
+chips = ["Any MCP client", "SQLite or mem0", "Multi-tenant", "Streamable HTTP", "One-command setup", "No API key needed"]
+footer = [
+  { text = "$ memcp up  " },
+  { text = "✓ first memory in 18s", style = "success" },
+]
+icon = "memcp.svg"  # Pinhead Map Icons, CC0
+
+[style]
+tile-from = "#bf3989"
+tile-to = "#8250df"

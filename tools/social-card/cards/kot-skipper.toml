@@ -1,0 +1,13 @@
+owner = "JartanFTW"
+name = "kot-skipper"
+headline = "Skip to the bases worth raiding"
+description = "A King of Thieves command-line tool that skips bases\nuntil it finds your target gold or gems."
+chips = ["Gold targets", "Gem color & tier", "Image recognition", "BlueStacks"]
+footer = [
+  { text = "$ main.py bluestacks -gd 50000 --gems 4 6 r5 b" },
+]
+icon = "kot-skipper.svg"  # Pinhead Map Icons, CC0
+
+[style]
+tile-from = "#cf222e"
+tile-to = "#9a6700"

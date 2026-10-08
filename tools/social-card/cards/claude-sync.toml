@@ -1,0 +1,13 @@
+owner = "Jartan-LLC"
+name = "claude-sync"
+headline = "Your ~/.claude, on every machine"
+description = "Change a setting or write a memory on one machine,\nand it is there on the others."
+chips = ["Syncthing", "Directory or volume", "Dev containers", "Survives reboots"]
+footer = [
+  { text = "$ ./claude-sync setup --path ~/.claude" },
+]
+icon = "claude-sync.svg"  # Pinhead Map Icons, CC0
+
+[style]
+tile-from = "#d97757"
+tile-to = "#bc4c00"
