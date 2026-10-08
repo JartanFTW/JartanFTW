@@ -1,0 +1,14 @@
+owner = "Jartan-LLC"
+name = "scaffold"
+description = "Everything a serious Python project needs,\nset up and passing on day one."
+chips = ["Dev container", "Quality gate", "Security-first", "CI & releases", "Auto-updates", "AI-ready"]
+footer = [
+  { text = "$ make check  " },
+  { text = "✓ passing", style = "success" },
+]
+icon = "scaffold.svg"  # Pinhead Map Icons, CC0
+
+[style]
+tile-from = "#1a7f37"
+tile-to = "#1f6feb"
+tile-size = "300px"

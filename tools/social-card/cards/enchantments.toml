@@ -1,0 +1,16 @@
+owner = "Jartan-LLC"
+name = "enchantments"
+headline = "An agent workbench for every dev container"
+description = "Claude Code, Liza, code search and a code graph.\nLogins, plugins and tools survive rebuilds."
+chips = ["claude-code", "gh-config", "grimoire", "liza", "liza-toolchain", "codebase-memory-mcp"]
+footer = [
+  { text = '"ghcr.io/jartan-llc/enchantments/claude-code:1"', style = "string" },
+  { text = ": {}" },
+]
+icon = "enchantments.svg"
+
+[style]
+tile-from = "#8957e5"
+tile-to = "#1f6feb"
+icon-size = "100%"
+chip-font = '"DejaVu Sans Mono"'

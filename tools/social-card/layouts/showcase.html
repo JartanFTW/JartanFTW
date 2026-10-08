@@ -1,0 +1,124 @@
+<!doctype html>
+<!-- showcase layout: fields, footer styles and [style] keys are in ../README.md -->
+<html style="{{ style_vars }}">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "Noto Sans"; src: url("{{ fonts }}/NotoSans-Regular.ttf"); }
+  @font-face { font-family: "Noto Sans"; font-weight: bold; src: url("{{ fonts }}/NotoSans-Bold.ttf"); }
+  @font-face { font-family: "DejaVu Sans Mono"; src: url("{{ fonts }}/DejaVuSansMono.ttf"); }
+  @font-face { font-family: "DejaVu Sans Mono"; font-weight: bold; src: url("{{ fonts }}/DejaVuSansMono-Bold.ttf"); }
+
+  :root {
+    --bg-top: #0d1117;
+    --bg-bottom: #161b26;
+    --fg: #f0f6fc;
+    --muted: #9eaaba;
+    --string: #a5d6ff;
+    --success: #3fb950;
+    --chip-fill: #1e2532;
+    --chip-line: #343e50;
+    --chip-dot: #58a6ff;
+    --chip-font: "Noto Sans";
+    --tile-from: #8957e5;
+    --tile-to: #1f6feb;
+    --tile-size: 260px;
+    --icon-size: 62%;
+    --margin: 72px;  /* social sites crop the edges */
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+
+  body {
+    width: 1280px;
+    height: 640px;
+    overflow: hidden;
+    position: relative;
+    padding: 48px var(--margin) 0;
+    background: linear-gradient(var(--bg-top), var(--bg-bottom));
+    color: var(--fg);
+    font-family: "Noto Sans", sans-serif;
+  }
+
+  .top { display: flex; justify-content: space-between; gap: 48px; }
+  .intro { min-width: 0; flex: 1; }
+
+  .owner { font: 26px "DejaVu Sans Mono", monospace; color: var(--muted); line-height: 32px; }
+  .name { font-size: 120px; font-weight: bold; line-height: 1.1; margin: 0 0 16px -4px; white-space: nowrap; }
+  .headline { font-size: 44px; font-weight: bold; line-height: 1.2; margin-top: 8px; white-space: nowrap; }
+  .description { font-size: 30px; color: var(--muted); line-height: 40px; margin-top: 6px; white-space: pre-line; }
+
+  .tile {
+    flex: none;
+    width: var(--tile-size);
+    height: var(--tile-size);
+    border-radius: 50px;
+    border: 2px solid rgb(255 255 255 / 16%);
+    background: linear-gradient(135deg, var(--tile-from), var(--tile-to));
+    display: grid;
+    place-items: center;
+  }
+  .tile img { width: var(--icon-size); height: var(--icon-size); object-fit: contain; }
+
+  .chips { display: inline-grid; grid-template-columns: repeat(3, 1fr); gap: 14px 18px; margin-top: 24px; }
+  .chip {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    height: 52px;
+    padding: 0 28px 0 20px;
+    border-radius: 12px;
+    background: var(--chip-fill);
+    border: 2px solid var(--chip-line);
+    font: bold 23px var(--chip-font), sans-serif;
+    white-space: nowrap;
+  }
+  .chip::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--chip-dot); }
+
+  .footer {
+    position: absolute;
+    left: var(--margin);
+    bottom: 56px;
+    font: 26px "DejaVu Sans Mono", monospace;
+    white-space: pre;
+  }
+  .muted { color: var(--muted); }
+  .fg { color: var(--fg); }
+  .string { color: var(--string); }
+  .success { color: var(--success); font-weight: bold; }
+</style>
+</head>
+<body>
+  <div class="top">
+    <div class="intro">
+      {% if owner %}<div class="owner">{{ owner }} /</div>{% endif %}
+      <div class="name fit">{{ name }}</div>
+      {% if headline %}<div class="headline fit">{{ headline }}</div>{% endif %}
+      {% if description %}<div class="description">{{ description }}</div>{% endif %}
+    </div>
+    {% if icon %}<div class="tile"><img src="{{ icon }}" alt=""></div>{% endif %}
+  </div>
+
+  {% if chips %}
+  <div class="chips">
+    {% for chip in chips %}<div class="chip">{{ chip }}</div>{% endfor %}
+  </div>
+  {% endif %}
+
+  {% if footer %}
+  <div class="footer">{% for segment in footer %}<span class="{{ segment.style | default('muted') }}">{{ segment.text }}</span>{% endfor %}</div>
+  {% endif %}
+
+  <script>
+    // Shrink each .fit line until it fits its column; CSS can't size text to fit.
+    window.cardReady = document.fonts.ready.then(() => {
+      for (const el of document.querySelectorAll(".fit")) {
+        let size = parseFloat(getComputedStyle(el).fontSize);
+        while (el.scrollWidth > el.clientWidth && size > 20) {
+          el.style.fontSize = `${(size -= 2)}px`;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
