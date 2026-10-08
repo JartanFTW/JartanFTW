@@ -1,13 +1,27 @@
+layout = "devices"
 owner = "Jartan-LLC"
 name = "claude-sync"
+name_accent = "sync"
 headline = "Your ~/.claude, on every machine"
-description = "Change a setting or write a memory on one machine,\nand it is there on the others."
+description = "Change a setting or write a memory\non one machine, and it is there\non the others."
 chips = ["Syncthing", "Directory or volume", "Dev containers", "Survives reboots"]
 footer = [
   { text = "$ ./claude-sync setup --path ~/.claude" },
 ]
-icon = "claude-sync.svg"  # Pinhead Map Icons, CC0
+icon = "claude-sync.svg"  # Phosphor Icons arrows-clockwise-fill, MIT
+
+# devices and matrix
+tree_root = "~/.claude/"
+tree = ["settings.json", "CLAUDE.md", "memory/", "skills/"]
+devices = [
+  { name = "laptop", icon = "icons/laptop.svg" },
+  { name = "desktop", icon = "icons/desktop.svg" },
+  { name = "dev container", icon = "icons/cube.svg" },
+]
 
 [style]
 tile-from = "#d97757"
 tile-to = "#bc4c00"
+accent-from = "#f0a07a"
+accent-to = "#d97757"
+glow = "#2b170e"
