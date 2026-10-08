@@ -58,7 +58,8 @@ def screenshot(html, out):
     with tempfile.TemporaryDirectory() as tmp, sync_playwright() as p:
         page_file = Path(tmp) / "card.html"
         page_file.write_text(html)
-        browser = p.chromium.launch()
+        # CSS masks are fetched with CORS, which Chromium refuses between file:// URLs.
+        browser = p.chromium.launch(args=["--allow-file-access-from-files"])
         page = browser.new_page(viewport={"width": WIDTH, "height": HEIGHT})
         page.goto(page_file.as_uri())
         page.evaluate("async () => { await document.fonts.ready; await window.cardReady; }")

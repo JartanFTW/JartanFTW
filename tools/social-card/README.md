@@ -39,6 +39,7 @@ the rest. `cards/` has worked examples.
 | `chips` | list of strings | Short feature labels |
 | `footer` | list of `{ text, style }` | Text segments in a row; `style` is a class the layout defines |
 | `icon` | path | SVG or PNG, relative to the content file |
+| `chips_title` | string | Heading over the chips, in layouts that show one |
 | `[style]` | table | Overrides for the layout's CSS custom properties, without the `--`: `tile-from = "#1a7f37"` sets `--tile-from` |
 
 ## Layouts
@@ -55,6 +56,19 @@ Footer styles: `muted` (default), `fg`, `string`, `success`.
 (`"Noto Sans"` or `'"DejaVu Sans Mono"'`), and the palette: `bg-top`, `bg-bottom`,
 `fg`, `muted`, `string`, `success`, `chip-fill`, `chip-line`, `chip-dot`.
 
+### tome
+
+An open spellbook on leather: owner, name with a red opening (its first letter, or
+`name_accent` if the name starts with it), headline, description, an optional
+`epigraph` quotation with its `epigraph_source`, and footer on the left page; the chips as numbered chapters on the right, under
+`chips_title` (default "Spells within"). The icon is drawn as a gold seal behind the
+right page's lower corner; it is used as a mask, so any single-colour SVG or PNG works.
+
+Footer styles: `muted` (default), `fg`, `string`, `success`.
+
+`[style]` keys: `leather`, `leather-edge`, `cover`, `parchment`, `parchment-edge`,
+`page-stack`, `ink`, `ink-faded`, `rubric`, `gold`, `sigil-size`.
+
 ### Writing a layout
 
 A layout is a [Jinja](https://jinja.palletsprojects.com/) template rendered at
@@ -70,5 +84,7 @@ to `window.cardReady`; the screenshot waits for it.
 
 ## Fonts
 
-`fonts/` bundles Noto Sans ([OFL](fonts/NotoSans-OFL.txt)) and DejaVu Sans Mono
-([licence](fonts/DejaVu-LICENSE.txt)) so cards render the same on every machine.
+`fonts/` bundles Noto Sans ([OFL](fonts/NotoSans-OFL.txt)), Cinzel
+([OFL](fonts/Cinzel-OFL.txt)), EB Garamond Italic ([OFL](fonts/EBGaramond-OFL.txt))
+and DejaVu Sans Mono ([licence](fonts/DejaVu-LICENSE.txt)) so cards render the same on
+every machine.

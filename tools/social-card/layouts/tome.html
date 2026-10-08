@@ -1,0 +1,206 @@
+<!doctype html>
+<!-- tome layout: fields, footer styles and [style] keys are in ../README.md -->
+<html style="{{ style_vars }}">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "Cinzel"; font-weight: 400 900; src: url("{{ fonts }}/Cinzel.ttf"); }
+  @font-face { font-family: "EB Garamond"; font-style: italic; font-weight: 400 800; src: url("{{ fonts }}/EBGaramond-Italic.ttf"); }
+  @font-face { font-family: "DejaVu Sans Mono"; src: url("{{ fonts }}/DejaVuSansMono.ttf"); }
+
+  :root {
+    --leather: #2b1712;
+    --leather-edge: #140a07;
+    --cover: #5a1e1a;
+    --parchment: #f3e7c8;
+    --parchment-edge: #d9c08a;
+    --page-stack: #e8d6a8;
+    --ink: #2e2015;
+    --ink-faded: #6b5640;
+    --rubric: #9b2318;
+    --gold: #a87b2a;
+
+    --book-inset: 18px;
+    --book-inset-x: 24px;
+    --page-pad: 52px;
+    --sigil-size: 136px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    width: 1280px;
+    height: 640px;
+    overflow: hidden;
+    padding: var(--book-inset) var(--book-inset-x);
+    background: radial-gradient(ellipse at center, var(--leather) 55%, var(--leather-edge));
+  }
+
+  .book {
+    height: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--cover);
+    box-shadow: 0 18px 40px rgb(0 0 0 / 55%), inset 0 0 0 3px rgb(0 0 0 / 25%);
+  }
+
+  .page {
+    position: relative;
+    padding: 44px var(--page-pad) 40px;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+  }
+  /* edges darken toward the cover, and the gutter falls into shadow */
+  .page.left {
+    background: linear-gradient(to right, var(--parchment-edge), var(--parchment) 6%, var(--parchment) 91%, var(--parchment-edge));
+    border-radius: 4px 0 0 4px;
+    box-shadow: 0 3px 0 var(--page-stack), 0 6px 0 var(--parchment-edge);
+  }
+  .page.right {
+    background: linear-gradient(to left, var(--parchment-edge), var(--parchment) 6%, var(--parchment) 91%, var(--parchment-edge));
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 3px 0 var(--page-stack), 0 6px 0 var(--parchment-edge);
+  }
+
+  .owner, .contents-title {
+    font: 24px "Cinzel", serif;
+    letter-spacing: 0.2em;
+    color: var(--ink-faded);
+  }
+
+  .name {
+    font: 700 110px "Cinzel", serif;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+  .name .accent { color: var(--rubric); }
+
+  .rule { width: 240px; height: 18px; margin: 6px 0 18px; color: var(--gold); }
+
+  .headline {
+    font: italic 500 38px "EB Garamond", serif;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+  .description {
+    font: italic 29px "EB Garamond", serif;
+    line-height: 1.25;
+    color: var(--ink-faded);
+    margin-top: 12px;
+    white-space: pre-line;
+  }
+
+  .footer {
+    margin-top: auto;
+    font: 19px "DejaVu Sans Mono", monospace;
+    white-space: pre;
+  }
+  /* sits midway between the description and the footer */
+  .epigraph {
+    margin-top: auto;
+    padding: 0 24px;
+    text-align: center;
+    font: italic 30px "EB Garamond", serif;
+    line-height: 1.25;
+    color: var(--ink-faded);
+    white-space: pre-line;
+  }
+  .epigraph small { display: block; margin-top: 8px; font-size: 22px; }
+  .muted { color: var(--ink-faded); }
+  .fg { color: var(--ink); }
+  .string { color: var(--rubric); }
+  .success { color: var(--gold); }
+
+  .contents-title { text-align: center; }
+  .right .rule { margin: 6px auto 22px; }
+
+  /* the sigil sits behind the page's text, so a long contents list can overlap it */
+  .contents { position: relative; list-style: none; counter-reset: chapter; }
+  .contents li {
+    counter-increment: chapter;
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    align-items: baseline;
+    font: 600 38px "Cinzel", serif;
+    line-height: 1.75;
+  }
+  .contents.annotated li { font-size: 32px; line-height: 1.2; margin-bottom: 10px; }
+  .note {
+    display: block;
+    font: italic 24px "EB Garamond", serif;
+    color: var(--ink-faded);
+  }
+  .contents li::before {
+    content: counter(chapter, upper-roman) ".";
+    color: var(--rubric);
+    font-size: 29px;
+  }
+
+  .sigil {
+    position: absolute;
+    right: var(--page-pad);
+    bottom: 36px;
+    width: var(--sigil-size);
+    height: var(--sigil-size);
+    background: var(--gold);
+    -webkit-mask: center / contain no-repeat;
+    mask: center / contain no-repeat;
+  }
+</style>
+</head>
+<body>
+  <svg width="0" height="0" style="position: absolute">
+    <symbol id="rule" viewBox="0 0 240 18">
+      <path d="M0 9H100M140 9H240" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M120 1L128 9L120 17L112 9Z" fill="currentColor"/>
+      <circle cx="104" cy="9" r="2" fill="currentColor"/>
+      <circle cx="136" cy="9" r="2" fill="currentColor"/>
+    </symbol>
+  </svg>
+
+  <div class="book">
+    <div class="page left">
+      {% if owner %}<div class="owner">{{ owner }}</div>{% endif %}
+      {% set accent = name_accent if name_accent and name.startswith(name_accent) else name[:1] %}
+      <div class="name fit"><span class="accent">{{ accent }}</span>{{ name[accent | length:] }}</div>
+      <svg class="rule"><use href="#rule"/></svg>
+      {% if headline %}<div class="headline fit">{{ headline }}</div>{% endif %}
+      {% if description %}<div class="description">{{ description }}</div>{% endif %}
+      {% if epigraph %}<div class="epigraph">“{{ epigraph }}”{% if epigraph_source %}<small>— {{ epigraph_source }}</small>{% endif %}</div>{% endif %}
+      {% if footer %}
+      <div class="footer">{% for segment in footer %}<span class="{{ segment.style | default('muted') }}">{{ segment.text }}</span>{% endfor %}</div>
+      {% endif %}
+    </div>
+
+    <div class="page right">
+      {% if icon %}<div class="sigil" style="-webkit-mask-image: url('{{ icon }}'); mask-image: url('{{ icon }}')"></div>{% endif %}
+      {% if chips %}
+      <div class="contents-title">{{ chips_title | default("Spells within") }}</div>
+      <svg class="rule"><use href="#rule"/></svg>
+      {% set annotated = chips | selectattr("note", "defined") | list %}
+      <ol class="contents{{ ' annotated' if annotated }}">
+        {% for chip in chips %}
+        <li>{% if chip is mapping %}<span>{{ chip.text }}{% if chip.note %}<span class="note">{{ chip.note }}</span>{% endif %}</span>{% else %}{{ chip }}{% endif %}</li>
+        {% endfor %}
+      </ol>
+      {% endif %}
+    </div>
+  </div>
+
+  <script>
+    // Shrink each .fit line until it fits its page; CSS can't size text to fit.
+    window.cardReady = document.fonts.ready.then(() => {
+      for (const el of document.querySelectorAll(".fit")) {
+        let size = parseFloat(getComputedStyle(el).fontSize);
+        while (el.scrollWidth > el.clientWidth && size > 20) {
+          el.style.fontSize = `${(size -= 2)}px`;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

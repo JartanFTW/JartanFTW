@@ -1,0 +1,19 @@
+layout = "tome"
+owner = "Jartan-LLC"
+name = "Grimoire"
+headline = "Spells for Claude Code and Codex"
+description = "Skills, agents and hooks for development workflows."
+chips = [
+  { text = "claudivis", note = "the key to Claude Code configuration" },
+  { text = "gitwise", note = "GitHub etiquette, enforced as you work" },
+  { text = "praxis", note = "how quality code gets built" },
+  { text = "pythonica", note = "every corner of modern Python" },
+  { text = "recursio", note = "test-driven waves of nested subagents" },
+]
+epigraph = "Any sufficiently advanced technology\nis indistinguishable from magic."
+epigraph_source = "Arthur C. Clarke"
+footer = [
+  { text = "/plugin marketplace add " },
+  { text = "Jartan-LLC/grimoire", style = "string" },
+]
+icon = "grimoire-sigil.svg"
