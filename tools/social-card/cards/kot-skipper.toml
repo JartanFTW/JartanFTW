@@ -1,13 +1,28 @@
+layout = "gem-grid"
 owner = "JartanFTW"
 name = "kot-skipper"
 headline = "Skip to the bases worth raiding"
-description = "A King of Thieves command-line tool that skips bases\nuntil it finds your target gold or gems."
-chips = ["Gold targets", "Gem color & tier", "Image recognition", "BlueStacks"]
+description = "A King of Thieves command-line tool\nthat skips bases until it finds\nthe gems you're after."
+chips = ["Gem colour & tier", "Gold targets", "Image recognition", "BlueStacks"]
 footer = [
-  { text = "$ main.py bluestacks -gd 50000 --gems 4 6 r5 b" },
+  { text = "$ main.py bluestacks --gems 7 8 r6" },
 ]
 icon = "kot-skipper.svg"  # Pinhead Map Icons, CC0
+
+# gem-grid, gem-log and gem-ladder: written in kot-skipper's own --gems syntax
+gem_target = "7 8 r6"
+ladder_colour = "p"
+bases = [
+  ["g2", "y1", "p3"],
+  ["b3", "r2"],
+  ["y2", "g3", "b1"],
+  ["p2", "r3"],
+  ["y8", "g2", "b3"],
+]
 
 [style]
 tile-from = "#cf222e"
 tile-to = "#9a6700"
+accent-from = "#f5c518"
+accent-to = "#e5484d"
+glow = "#2a1e08"
