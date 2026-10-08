@@ -42,7 +42,7 @@ the rest. `cards/` has worked examples.
 | `description` | string | Longer text; `\n` forces a line break |
 | `chips` | list of strings | Short feature labels |
 | `footer` | list of `{ text, style }` | Text segments in a row; `style` is a class the layout defines |
-| `icon` | path | SVG or PNG, relative to the content file |
+| `icon` | path | SVG or PNG, relative to the content file. Any `icon` key in a nested table is resolved the same way |
 | `name_accent` | string | Part of `name` to highlight, in layouts that support it |
 | `chips_title` | string | Heading over the chips, in layouts that show one |
 | `[style]` | table | Overrides for the layout's CSS custom properties, without the `--`: `tile-from = "#1a7f37"` sets `--tile-from` |
@@ -74,9 +74,9 @@ Footer styles: `muted` (default), `fg`, `string`, `success`.
 `[style]` keys: `leather`, `leather-edge`, `cover`, `parchment`, `parchment-edge`,
 `page-stack`, `ink`, `ink-faded`, `rubric`, `gold`, `sigil-size`.
 
-### recall, recall-constellation, constellation, index-cards
+### recall, recall-constellation, constellation, index-cards, devices, matrix
 
-Four layouts that share a dark text column on the left: owner, name with
+Six layouts that share a dark text column on the left: owner, name with
 `name_accent` in a gradient, headline, description and footer. Each draws something
 different on the right.
 
@@ -100,6 +100,11 @@ different on the right.
 - **constellation** draws `nodes` (or, without them, `chips`) as labelled points
   linked to a hub that holds the icon, over a starfield.
 - **index-cards** fans up to three `cards`, each `{ label, text }`, as ruled cards.
+- **devices** shows up to three `devices` (`{ name, icon }`) as windows, each listing
+  `tree_root` and the `tree` items with a check, linked through a hub that holds the
+  icon.
+- **matrix** sets the same `tree` against up to four `devices`, a check in every
+  cell.
 
 The two constellation layouts scatter their stars from a fixed `seed` (a whole
 number), so a render is repeatable; set it in the content file to try another
@@ -109,7 +114,7 @@ Footer styles: `muted` (default), `fg`, `accent-text`, `success`.
 
 `[style]` keys: `bg`, `glow`, `fg`, `muted`, `line`, `accent-from`, `accent-to`,
 `success`; constellation adds `hub-size`, `link`, `node-glow`; recall-constellation
-adds `link`, `node-glow`, `panel-fill`; index-cards adds
+adds `link`, `node-glow`, `panel-fill`; devices adds `window`, `link-color`; index-cards adds
 `card-paper`, `card-rule`, `card-ink`, `card-label`.
 
 ### Writing a layout
@@ -127,7 +132,8 @@ to `window.cardReady`; the screenshot waits for it.
 
 Bundled layouts stay on the template search path, so a layout kept anywhere can
 `{% extends "_split.html" %}` (or any bundled layout) and override its `style`, `art`
-and `script` blocks.
+and `script` blocks. `_macros.html` holds drawings shared between layouts: `check()`
+and `glyph()`, which draws a single-colour icon in the surrounding text colour.
 
 ## Fonts
 

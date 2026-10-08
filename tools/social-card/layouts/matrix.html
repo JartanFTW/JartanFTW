@@ -1,0 +1,52 @@
+{% extends "_split.html" %}
+{% from "_macros.html" import check, glyph %}
+{# matrix layout: fields and [style] keys are in ../README.md #}
+
+{% block style %}
+
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .grid { display: grid; grid-template-columns: 1.6fr repeat(var(--columns), 1fr); align-items: center; }
+  .cell {
+    height: 82px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  .cell.label { align-items: flex-start; font: 22px "DejaVu Sans Mono", monospace; }
+  .cell.root { color: var(--accent-from); }
+  .cell.root, .cell.column { height: 96px; }
+  .cell.column { font: 17px "Noto Sans", sans-serif; color: var(--muted); white-space: nowrap; }
+  .cell.column .glyph { color: var(--fg); }
+  .grid > .cell.last { border-bottom: none; }
+{% endblock %}
+
+{% block art %}
+  {% set columns = (devices or [])[:4] %}
+  <div class="panel">
+    <div class="grid" style="--columns: {{ columns | length }}">
+      <div class="cell label root">{{ tree_root or "" }}</div>
+      {% for device in columns %}<div class="cell column">{% if device.icon %}{{ glyph(device.icon, 34) }}{% endif %}<span>{{ device.name }}</span></div>{% endfor %}
+      {% for item in (tree or [])[:6] %}
+        {% set last = " last" if loop.last else "" %}
+        <div class="cell label{{ last }}">{{ item }}</div>
+        {% for device in columns %}<div class="cell{{ last }}">{{ check(30) }}</div>{% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

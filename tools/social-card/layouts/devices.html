@@ -1,0 +1,79 @@
+{% extends "_split.html" %}
+{% from "_macros.html" import check, glyph %}
+{# devices layout: fields and [style] keys are in ../README.md #}
+
+{% block style %}
+  :root {
+    --window: #161b22;
+    --link-color: var(--accent-from);
+  }
+
+  .device {
+    position: absolute;
+    width: 276px;
+    padding: 16px 18px 14px;
+    border-radius: 14px;
+    background: var(--window);
+    border: 2px solid var(--line);
+    box-shadow: 0 10px 30px rgb(0 0 0 / 45%);
+  }
+  .device .head { display: flex; align-items: center; gap: 10px; font: bold 22px "Noto Sans", sans-serif; margin-bottom: 10px; }
+  .device .tree { font: 18px/1.65 "DejaVu Sans Mono", monospace; color: var(--muted); }
+  .device .root { color: var(--accent-from); }
+  .device .row { display: flex; justify-content: space-between; align-items: center; }
+
+  .links { position: absolute; inset: 0; }
+  .links line { stroke: var(--link-color); stroke-width: 3; stroke-dasharray: 8 8; opacity: 0.8; }
+  .hub {
+    position: absolute;
+    width: 66px;
+    height: 66px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--fg);
+    background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+    box-shadow: 0 0 40px color-mix(in srgb, var(--accent-to) 55%, transparent);
+  }
+{% endblock %}
+
+{% block art %}
+  {# Two windows on top, a third centred below; the hub sits between them. #}
+  {% set spots = [(632, 36), (944, 36), (788, 372)] %}
+  <svg class="links" width="1280" height="640"></svg>
+  {% for device in (devices or [])[:3] %}
+  <div class="device" style="left: {{ spots[loop.index0][0] }}px; top: {{ spots[loop.index0][1] }}px">
+    <div class="head">{% if device.icon %}{{ glyph(device.icon, 26) }}{% endif %}<span>{{ device.name }}</span></div>
+    <div class="tree">
+      {% if tree_root %}<div class="root">{{ tree_root }}</div>{% endif %}
+      {% for item in tree or [] %}<div class="row"><span>{{ "└" if loop.last else "├" }} {{ item }}</span>{{ check(18) }}</div>{% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+  <div class="hub">{% if icon %}{{ glyph(icon, 36) }}{% endif %}</div>
+{% endblock %}
+
+{% block script %}
+  // Put the hub in the gap between the top windows and the one below, and run a line
+  // from the nearest edge of each window to it, measured after layout so the lines
+  // meet the windows whatever their height.
+  function linkDevices() {
+    const windows = [...document.querySelectorAll(".device")].map((el) => el.getBoundingClientRect());
+    if (!windows.length) return;
+    const top = windows.slice(0, 2);
+    const below = windows[2];
+    const hub = {
+      x: windows.reduce((sum, r) => sum + r.left + r.width / 2, 0) / windows.length,
+      y: below ? (Math.max(...top.map((r) => r.bottom)) + below.top) / 2 : top[0].bottom + 60,
+    };
+    const hubEl = document.querySelector(".hub");
+    hubEl.style.left = `${hub.x}px`;
+    hubEl.style.top = `${hub.y}px`;
+    const edge = (r) => ({ x: r.left + r.width / 2, y: r.bottom <= hub.y ? r.bottom : r.top });
+    document.querySelector(".links").innerHTML = windows.map(edge)
+      .map((p) => `<line x1="${p.x}" y1="${p.y}" x2="${hub.x}" y2="${hub.y}"/>`).join("");
+  }
+
+  window.cardReady = document.fonts.ready.then(() => { fitText(); linkDevices(); });
+{% endblock %}

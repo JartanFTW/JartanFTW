@@ -47,12 +47,17 @@
   .headline { font: bold 40px/1.2 "Noto Sans", sans-serif; margin-top: 14px; white-space: nowrap; }
   .description { font: 27px/1.4 "Noto Sans", sans-serif; color: var(--muted); margin-top: 12px; white-space: pre-line; }
 
-  .footer { position: absolute; left: var(--margin); bottom: 56px; font: 25px "DejaVu Sans Mono", monospace; white-space: pre; }
+  /* a long command shrinks rather than running into the art on the right */
+  .footer { position: absolute; left: var(--margin); bottom: 56px; max-width: 540px; overflow: hidden;
+    font: 25px "DejaVu Sans Mono", monospace; white-space: pre; }
   .muted { color: var(--muted); }
   .fg { color: var(--fg); }
   .accent-text { color: var(--accent-to); }
   .success { color: var(--success); font-weight: bold; }
   .code { font-family: "DejaVu Sans Mono", monospace; }
+  /* a single-colour icon drawn in currentColor; see glyph() in _macros.html */
+  .glyph { display: inline-block; flex: none; background: currentColor;
+    -webkit-mask: center / contain no-repeat; mask: center / contain no-repeat; }
 {% block style %}{% endblock %}
 </style>
 </head>
@@ -68,7 +73,7 @@
   </div>
 
   {% if footer %}
-  <div class="footer">{% for segment in footer %}<span class="{{ segment.style | default('muted') }}">{{ segment.text }}</span>{% endfor %}</div>
+  <div class="footer fit">{% for segment in footer %}<span class="{{ segment.style | default('muted') }}">{{ segment.text }}</span>{% endfor %}</div>
   {% endif %}
 
   <script>

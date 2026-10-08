@@ -37,6 +37,20 @@ def style_vars(style):
     return "; ".join(f"--{name}: {value}" for name, value in style.items())
 
 
+def resolve_icons(value, base):
+    """Turn every `icon` path, at any depth, into a file URL relative to the content file."""
+    if isinstance(value, dict):
+        return {
+            key: (base / item).resolve().as_uri()
+            if key == "icon" and isinstance(item, str)
+            else resolve_icons(item, base)
+            for key, item in value.items()
+        }
+    if isinstance(value, list):
+        return [resolve_icons(item, base) for item in value]
+    return value
+
+
 def render_html(content_file, layout_override=None):
     content = tomllib.loads(content_file.read_text())
     content_dir = content_file.parent
@@ -46,8 +60,7 @@ def render_html(content_file, layout_override=None):
     if not layout.is_file():
         raise SystemExit(f"layout not found: {layout}")
 
-    if "icon" in content:
-        content["icon"] = (content_dir / content["icon"]).resolve().as_uri()
+    content = resolve_icons(content, content_dir)
     content["style_vars"] = style_vars(content.pop("style", {}))
     content["fonts"] = (HERE / "fonts").as_uri()
 
