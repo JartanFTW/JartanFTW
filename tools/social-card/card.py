@@ -5,7 +5,7 @@
 # ///
 """Render a social preview card from a TOML content file and an HTML layout.
 
-Usage: card.py CONTENT.toml [-o OUT.png]
+Usage: card.py CONTENT.toml [-l LAYOUT] [-o OUT.png]
 """
 
 import argparse
@@ -37,10 +37,12 @@ def style_vars(style):
     return "; ".join(f"--{name}: {value}" for name, value in style.items())
 
 
-def render_html(content_file):
+def render_html(content_file, layout_override=None):
     content = tomllib.loads(content_file.read_text())
     content_dir = content_file.parent
     layout = layout_path(content.pop("layout", "showcase"), content_dir)
+    if layout_override:
+        layout = layout_path(layout_override, Path.cwd())
     if not layout.is_file():
         raise SystemExit(f"layout not found: {layout}")
 
@@ -49,7 +51,9 @@ def render_html(content_file):
     content["style_vars"] = style_vars(content.pop("style", {}))
     content["fonts"] = (HERE / "fonts").as_uri()
 
-    env = jinja2.Environment(loader=jinja2.FileSystemLoader(layout.parent), autoescape=True)
+    # The bundled layouts stay on the search path so a custom layout can extend their bases.
+    loader = jinja2.FileSystemLoader([layout.parent, HERE / "layouts"])
+    env = jinja2.Environment(loader=loader, autoescape=True)
     return env.get_template(layout.name).render(content)
 
 
@@ -70,12 +74,14 @@ def screenshot(html, out):
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("content", type=Path, help="TOML content file")
+    parser.add_argument("-l", "--layout", help="layout to use instead of the content file's")
     parser.add_argument("-o", "--out", type=Path, help="PNG path (default: out/<content>.png)")
     args = parser.parse_args()
 
-    out = args.out or HERE / "out" / f"{args.content.stem}.png"
+    suffix = f"-{Path(args.layout).stem}" if args.layout else ""
+    out = args.out or HERE / "out" / f"{args.content.stem}{suffix}.png"
     out.parent.mkdir(parents=True, exist_ok=True)
-    screenshot(render_html(args.content.resolve()), out)
+    screenshot(render_html(args.content.resolve(), args.layout), out)
     print(out)
 
 

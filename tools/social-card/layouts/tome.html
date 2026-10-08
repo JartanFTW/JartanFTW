@@ -165,8 +165,9 @@
   <div class="book">
     <div class="page left">
       {% if owner %}<div class="owner">{{ owner }}</div>{% endif %}
-      {% set accent = name_accent if name_accent and name.startswith(name_accent) else name[:1] %}
-      <div class="name fit"><span class="accent">{{ accent }}</span>{{ name[accent | length:] }}</div>
+      {% set accent = name_accent if name_accent and name_accent in name else name[:1] %}
+      {% set at = name.find(accent) %}
+      <div class="name fit">{{ name[:at] }}<span class="accent">{{ accent }}</span>{{ name[at + accent | length:] }}</div>
       <svg class="rule"><use href="#rule"/></svg>
       {% if headline %}<div class="headline fit">{{ headline }}</div>{% endif %}
       {% if description %}<div class="description">{{ description }}</div>{% endif %}

@@ -1,0 +1,67 @@
+{% extends "_split.html" %}
+{# recall layout: fields, sessions format and [style] keys are in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 30px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .session { font: 20px "DejaVu Sans Mono", monospace; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+  .session + * { margin-top: -4px; }
+  .divider { border-top: 2px dashed var(--line); margin: 8px 0; }
+
+  .bubble { width: fit-content; max-width: 470px; padding: 14px 22px; font-size: 27px; line-height: 1.3; }
+  .user { margin-left: auto; background: #1f2937; border-radius: 18px 18px 4px 18px; }
+  .ai {
+    font-weight: bold;
+    border-radius: 18px 18px 18px 4px;
+    background: linear-gradient(90deg, rgb(219 97 162 / 28%), rgb(163 113 247 / 28%));
+    border: 1px solid rgb(163 113 247 / 55%);
+  }
+
+  /* a monospace space is a full character wide, which reads as two beside proportional text */
+  .bubble .code { word-spacing: -0.35em; }
+
+  .tool { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font: 20px "DejaVu Sans Mono", monospace; white-space: nowrap; }
+  .tool .name-pill {
+    padding: 5px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--accent-from);
+    color: var(--accent-from);
+    font-weight: bold;
+  }
+  .tool .result { color: var(--accent-to); font-size: 19px; }
+  .tool .result.success { color: var(--success); }
+{% endblock %}
+
+{% macro segments(value) -%}
+  {%- if value is string %}{{ value }}{% else %}{% for s in value %}<span class="{{ s.style | default('') }}">{{ s.text }}</span>{% endfor %}{% endif -%}
+{%- endmacro %}
+
+{% block art %}
+  {% if sessions %}
+  <div class="panel">
+    {% for session in sessions %}
+      {% if not loop.first %}<div class="divider"></div>{% endif %}
+      {% if session.label %}<div class="session">{{ session.label }}</div>{% endif %}
+      {% for turn in session.turns %}
+        {% if turn.user %}<div class="bubble user">{{ segments(turn.user) }}</div>
+        {% elif turn.ai %}<div class="bubble ai">{{ segments(turn.ai) }}</div>
+        {% elif turn.tool %}<div class="tool"><span class="name-pill">{{ turn.tool }}</span>{% if turn.result %}<span class="result {{ turn.style | default('') }}">{{ turn.result }}</span>{% endif %}</div>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endblock %}

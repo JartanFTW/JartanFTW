@@ -1,0 +1,87 @@
+<!doctype html>
+<!-- Base for the split layouts (recall, constellation, index-cards): the text column on
+     the left, each layout's artwork on the right. Not a layout itself. -->
+<html style="{{ style_vars }}">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "Noto Sans"; src: url("{{ fonts }}/NotoSans-Regular.ttf"); }
+  @font-face { font-family: "Noto Sans"; font-weight: bold; src: url("{{ fonts }}/NotoSans-Bold.ttf"); }
+  @font-face { font-family: "DejaVu Sans Mono"; src: url("{{ fonts }}/DejaVuSansMono.ttf"); }
+  @font-face { font-family: "DejaVu Sans Mono"; font-weight: bold; src: url("{{ fonts }}/DejaVuSansMono-Bold.ttf"); }
+  @font-face { font-family: "EB Garamond"; font-style: italic; font-weight: 400 800; src: url("{{ fonts }}/EBGaramond-Italic.ttf"); }
+
+  :root {
+    --bg: #0d1117;
+    --glow: #2a1440;
+    --fg: #f0f6fc;
+    --muted: #9eaaba;
+    --line: #30363d;
+    --accent-from: #db61a2;
+    --accent-to: #a371f7;
+    --success: #3fb950;
+    --margin: 72px;  /* social sites crop the edges */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    width: 1280px;
+    height: 640px;
+    overflow: hidden;
+    position: relative;
+    color: var(--fg);
+    font-family: "Noto Sans", sans-serif;
+    background: radial-gradient(circle at 78% 45%, var(--glow), var(--bg) 62%);
+  }
+
+  .text { position: absolute; left: var(--margin); top: 56px; width: 520px; }
+  .owner { font: 26px "DejaVu Sans Mono", monospace; color: var(--muted); }
+  .name { font: bold 112px/1.05 "Noto Sans", sans-serif; margin-left: -4px; white-space: nowrap; }
+  .name .accent {
+    background: linear-gradient(90deg, var(--accent-from), var(--accent-to));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .headline { font: bold 40px/1.2 "Noto Sans", sans-serif; margin-top: 14px; white-space: nowrap; }
+  .description { font: 27px/1.4 "Noto Sans", sans-serif; color: var(--muted); margin-top: 12px; white-space: pre-line; }
+
+  .footer { position: absolute; left: var(--margin); bottom: 56px; font: 25px "DejaVu Sans Mono", monospace; white-space: pre; }
+  .muted { color: var(--muted); }
+  .fg { color: var(--fg); }
+  .accent-text { color: var(--accent-to); }
+  .success { color: var(--success); font-weight: bold; }
+  .code { font-family: "DejaVu Sans Mono", monospace; }
+{% block style %}{% endblock %}
+</style>
+</head>
+<body>
+  {% block art %}{% endblock %}
+
+  <div class="text">
+    {% if owner %}<div class="owner">{{ owner }} /</div>{% endif %}
+    {% set at = name.find(name_accent) if name_accent else -1 %}
+    <div class="name fit">{% if at >= 0 %}{{ name[:at] }}<span class="accent">{{ name_accent }}</span>{{ name[at + name_accent | length:] }}{% else %}{{ name }}{% endif %}</div>
+    {% if headline %}<div class="headline fit">{{ headline }}</div>{% endif %}
+    {% if description %}<div class="description">{{ description }}</div>{% endif %}
+  </div>
+
+  {% if footer %}
+  <div class="footer">{% for segment in footer %}<span class="{{ segment.style | default('muted') }}">{{ segment.text }}</span>{% endfor %}</div>
+  {% endif %}
+
+  <script>
+    // Shrink each .fit line until it fits its column; CSS can't size text to fit.
+    const fitText = () => {
+      for (const el of document.querySelectorAll(".fit")) {
+        let size = parseFloat(getComputedStyle(el).fontSize);
+        while (el.scrollWidth > el.clientWidth && size > 20) {
+          el.style.fontSize = `${(size -= 2)}px`;
+        }
+      }
+    };
+    {% block script %}window.cardReady = document.fonts.ready.then(fitText);{% endblock %}
+  </script>
+</body>
+</html>

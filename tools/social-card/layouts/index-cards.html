@@ -1,0 +1,42 @@
+{% extends "_split.html" %}
+{# index-cards layout: fields, cards format and [style] keys are in ../README.md #}
+
+{% block style %}
+  :root {
+    --card-paper: #fdf8ec;
+    --card-rule: #c9d6ea;
+    --card-ink: #3b2a3a;
+    --card-label: #8a3f7a;
+  }
+  .card {
+    position: absolute;
+    width: 500px;
+    height: 230px;
+    padding: 24px 30px;
+    border-radius: 10px;
+    color: var(--card-ink);
+    background: repeating-linear-gradient(var(--card-paper) 0 44px, var(--card-rule) 44px 46px);
+    box-shadow: 0 16px 40px rgb(0 0 0 / 50%);
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 12px;
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient(90deg, var(--accent-from), var(--accent-to));
+  }
+  .card .label { font: bold 18px "DejaVu Sans Mono", monospace; color: var(--card-label); margin: 4px 0 6px; }
+  .card .memo { font: italic 500 36px/46px "EB Garamond", serif; white-space: pre-line; }
+{% endblock %}
+
+{% block art %}
+  {# Each card covers only the blank lower half of the one before it, which leaves room for three. #}
+  {% set tilts = [-4, 3, -2] %}
+  {% for card in (cards or [])[:3] %}
+  <div class="card" style="left: {{ 680 + (loop.index0 % 2) * 60 }}px; top: {{ 28 + loop.index0 * (330 // [loop.length - 1, 1] | max) }}px; transform: rotate({{ tilts[loop.index0] }}deg)">
+    {% if card.label %}<div class="label">{{ card.label }}</div>{% endif %}
+    <div class="memo">{{ card.text }}</div>
+  </div>
+  {% endfor %}
+{% endblock %}

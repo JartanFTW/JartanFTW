@@ -1,0 +1,109 @@
+{% extends "_split.html" %}
+{# constellation layout: fields and [style] keys are in ../README.md #}
+
+{% block style %}
+  :root {
+    --hub-size: 150px;
+    --link: rgb(188 140 255 / 40%);
+    --node-glow: #a371f7;
+  }
+  .stars { position: absolute; inset: 0; }
+  .stars circle { fill: var(--fg); }
+  .stars .glint { fill: var(--fg); opacity: 0.8; filter: drop-shadow(0 0 4px var(--node-glow)); }
+  .web { position: absolute; inset: 0; }
+  .web line { stroke: var(--link); stroke-width: 2; }
+  .web circle { fill: var(--fg); filter: drop-shadow(0 0 8px var(--node-glow)); }
+
+  .hub {
+    position: absolute;
+    width: var(--hub-size);
+    height: var(--hub-size);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+    box-shadow: 0 0 60px rgb(163 113 247 / 60%);
+  }
+  .hub img { width: 62%; }
+
+  .node-label {
+    position: absolute;
+    white-space: nowrap;
+    font: 19px "DejaVu Sans Mono", monospace;
+    padding: 4px 11px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: rgb(13 17 23 / 85%);
+  }
+{% endblock %}
+
+{% block art %}
+  <svg class="stars" width="1280" height="640"></svg>
+  <svg class="web" width="1280" height="640"></svg>
+  <div class="hub">{% if icon %}<img src="{{ icon }}" alt="">{% endif %}</div>
+  {% for node in nodes or chips or [] %}<div class="node-label">{{ node }}</div>{% endfor %}
+{% endblock %}
+
+{% block script %}
+  // Place the nodes around the hub. Radii alternate so neighbours don't crowd; each
+  // label sits on the far side of its node and is kept inside the art area.
+  const HUB = { x: 960, y: 320 };
+  const AREA = { left: 628, right: 1240, top: 24, bottom: 616 };
+  const RADII = [200, 245];
+
+  function layoutWeb() {
+    const svg = document.querySelector(".web");
+    const hub = document.querySelector(".hub");
+    hub.style.left = `${HUB.x}px`;
+    hub.style.top = `${HUB.y}px`;
+    const labels = [...document.querySelectorAll(".node-label")];
+    const nodes = labels.map((label, i) => {
+      const angle = -Math.PI / 2 + (2 * Math.PI * i) / labels.length;
+      const r = RADII[i % RADII.length];
+      return { label, x: HUB.x + r * Math.cos(angle), y: HUB.y + r * Math.sin(angle) };
+    });
+
+    const line = (a, b) => `<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"/>`;
+    let marks = nodes.map((n) => line(HUB, n)).join("");
+    marks += nodes.map((n, i) => (i % 2 ? line(n, nodes[(i + 1) % nodes.length]) : "")).join("");
+    marks += nodes.map((n) => `<circle cx="${n.x}" cy="${n.y}" r="8"/>`).join("");
+    svg.innerHTML = marks;
+
+    for (const n of nodes) {
+      const { width, height } = n.label.getBoundingClientRect();
+      const below = n.y >= HUB.y;
+      const left = Math.min(Math.max(n.x - width / 2, AREA.left), AREA.right - width);
+      const top = below ? n.y + 16 : n.y - 16 - height;
+      n.label.style.left = `${left}px`;
+      n.label.style.top = `${Math.min(Math.max(top, AREA.top), AREA.bottom - height)}px`;
+    }
+  }
+
+  // A starfield thickest around the hub, faint behind the text. Seeded, so every
+  // render is identical.
+  function scatterStars() {
+    let seed = {{ seed | default(23) | int }};
+    const rand = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    const star = (x, y, r, alpha) => `<circle cx="${x}" cy="${y}" r="${r}" opacity="${alpha}"/>`;
+    const glint = (x, y, r) => {
+      const w = r * 0.22;
+      return `<path class="glint" d="M${x} ${y - r}L${x + w} ${y - w}L${x + r} ${y}L${x + w} ${y + w}` +
+        `L${x} ${y + r}L${x - w} ${y + w}L${x - r} ${y}L${x - w} ${y - w}Z"/>`;
+    };
+    let marks = "";
+    for (let i = 0; i < 50; i++) {
+      const near = i < 34;  // most stars cluster around the hub
+      const x = near ? HUB.x + (rand() - 0.5) * 640 : rand() * 1280;
+      const y = near ? HUB.y + (rand() - 0.5) * 600 : rand() * 640;
+      const behindText = x < 600;
+      marks += star(x, y, 0.6 + rand() * 1.2, (behindText ? 0.15 : 0.3) + rand() * (behindText ? 0.15 : 0.35));
+    }
+    for (let i = 0; i < 3; i++) {
+      marks += glint(660 + rand() * 580, 30 + rand() * 580, 6 + rand() * 6);
+    }
+    document.querySelector(".stars").innerHTML = marks;
+  }
+
+  window.cardReady = document.fonts.ready.then(() => { fitText(); scatterStars(); layoutWeb(); });
+{% endblock %}
