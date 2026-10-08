@@ -1,14 +1,50 @@
+layout = "recall-constellation"
+seed = 58
 owner = "Jartan-LLC"
 name = "memcp"
+name_accent = "cp"
 headline = "Give your AI a memory"
-description = "A backend-agnostic, multi-tenant MCP memory server.\nAny client. Any backend."
+description = "A backend-agnostic, multi-tenant\nMCP memory server.\nAny client. Any backend."
 chips = ["Any MCP client", "SQLite or mem0", "Multi-tenant", "Streamable HTTP", "One-command setup", "No API key needed"]
 footer = [
   { text = "$ memcp up  " },
   { text = "✓ first memory in 18s", style = "success" },
 ]
-icon = "memcp.svg"  # Pinhead Map Icons, CC0
+icon = "memcp.svg"  # Phosphor Icons brain-fill, MIT
+
+# constellation
+nodes = ["prefers uv over pip", "deploys on Fridays", "tabs, not spaces", "repo: memcp",
+         "dark mode, always", "on call Tuesdays", "timezone: ET"]
 
 [style]
 tile-from = "#bf3989"
 tile-to = "#8250df"
+
+# recall
+[[sessions]]
+label = "Mon · session 1"
+turns = [
+  { user = "We deploy with uv, never pip." },
+  { tool = "add_memory", result = "✓ stored", style = "success" },
+]
+
+[[sessions]]
+label = "Fri · session 7"
+turns = [
+  { user = "How do I install the deps?" },
+  { tool = "search_memory", result = "“deploys with uv, never pip”" },
+  { ai = [{ text = "Run " }, { text = "uv sync", style = "code" }, { text = "." }] },
+]
+
+# index-cards
+[[cards]]
+label = "user: bob"
+text = "Allergic to cilantro.\nNever suggest it."
+
+[[cards]]
+label = "user: priya"
+text = "Ships on Fridays,\nbut only before noon."
+
+[[cards]]
+label = "user: alice"
+text = "Deploys with uv,\nnever pip."
