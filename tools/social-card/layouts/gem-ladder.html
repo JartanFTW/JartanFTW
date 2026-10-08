@@ -1,0 +1,80 @@
+{% extends "_split.html" %}
+{# gem-ladder layout: one colour climbing tiers 1-8, the tiers gem_target picks
+   lit and named. Fields are in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .lit svg { filter: drop-shadow(0 0 10px color-mix(in srgb, var(--accent-from) 55%, transparent)); }
+  .panel { display: block; }
+  .rise { position: absolute; left: 30px; top: 26px; font: 19px "DejaVu Sans Mono", monospace; color: var(--muted); }
+  .step {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font: 17px "DejaVu Sans Mono", monospace;
+    color: var(--muted);
+  }
+  .step:not(.lit) { opacity: 0.55; }
+  .step.lit span { color: var(--accent-from); font-weight: bold; }
+  /* names the target over the lit steps; their glow already marks them */
+  .target {
+    position: absolute;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font: bold 19px "DejaVu Sans Mono", monospace;
+    color: var(--accent-from);
+  }
+{% endblock %}
+
+{% block art %}
+  {% set colour = ladder_colour | default("p") %}
+  <div class="panel">
+    <div class="rise">tier ↑</div>
+    {% if gem_target %}<div class="target" hidden>--gems {{ gem_target }}</div>{% endif %}
+    {% for tier in range(1, 9) %}
+    <div class="step" style="left: {{ 14 + (tier - 1) * 64 }}px; bottom: {{ 34 + (tier - 1) * 34 }}px">
+      <span data-gem="{{ colour }}{{ tier }}" data-size="{{ 40 + tier * 6 }}"></span><span>{{ tier }}</span>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block script %}
+  {% include "_gems.js" %}
+
+  // Draw the gems, light the targeted steps, and centre the target over them.
+  function drawLadder() {
+    const rules = parseGemTarget({{ gem_target | default("") | tojson }});
+    drawGems();
+    const panel = document.querySelector(".panel").getBoundingClientRect();
+    const picked = [...document.querySelectorAll(".step")].filter((step) => {
+      const lit = gemMatches(step.querySelector("[data-gem]").dataset.gem, rules);
+      step.classList.toggle("lit", lit);
+      return lit;
+    });
+    const target = document.querySelector(".target");
+    if (!picked.length || !target) return;
+    const rects = picked.map((el) => el.getBoundingClientRect());
+    const left = Math.min(...rects.map((r) => r.left)), right = Math.max(...rects.map((r) => r.right));
+    target.style.left = `${(left + right) / 2 - panel.left}px`;
+    target.style.top = `${Math.min(...rects.map((r) => r.top)) - panel.top - 34}px`;
+    target.hidden = false;
+  }
+
+  window.cardReady = document.fonts.ready.then(() => { fitText(); drawLadder(); });
+{% endblock %}

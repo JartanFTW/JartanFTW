@@ -74,9 +74,9 @@ Footer styles: `muted` (default), `fg`, `string`, `success`.
 `[style]` keys: `leather`, `leather-edge`, `cover`, `parchment`, `parchment-edge`,
 `page-stack`, `ink`, `ink-faded`, `rubric`, `gold`, `sigil-size`.
 
-### recall, recall-constellation, constellation, index-cards, devices, matrix, chart, terminal, gauge
+### recall, recall-constellation, constellation, index-cards, devices, matrix, chart, terminal, gauge, gem-grid, gem-log, gem-ladder
 
-Nine layouts that share a dark text column on the left: owner, name with
+Twelve layouts that share a dark text column on the left: owner, name with
 `name_accent` in a gradient, headline, description and footer. Each draws something
 different on the right.
 
@@ -115,6 +115,13 @@ different on the right.
 - **gauge** draws a `[gauge]` dial from `min` (default 0) to `max`, with `tick_step`,
   a needle at `value` (shown as `value_text` if given), a `caption`, and `bands`, each
   `{ to, style, label }` with `style` one of `good`, `warning`, `critical`.
+- **gem-grid**, **gem-log** and **gem-ladder** draw King of Thieves-style gems, each a
+  code such as `y8` (colour `r`, `b`, `y`, `g` or `p`, then tier 1-8). `gem_target` is
+  written in kot-skipper's own `--gems` syntax (`"7 8 r6"`: tiers, colours, or a colour
+  and tier), and decides what each layout lights. gem-grid shows every gem with the
+  targeted ones lit and a caption naming them; gem-log reads `bases`, a list of gem
+  lists, and skips bases until one holds a targeted gem; gem-ladder climbs tiers 1-8
+  of `ladder_colour` (default `p`).
 
 The two constellation layouts scatter their stars from a fixed `seed` (a whole
 number), so a render is repeatable; set it in the content file to try another
@@ -144,7 +151,8 @@ Bundled layouts stay on the template search path, so a layout kept anywhere can
 `{% extends "_split.html" %}` (or any bundled layout) and override its `style`, `art`
 and `script` blocks. `_macros.html` holds pieces shared between layouts: `check()`;
 `glyph()`, which draws a single-colour icon in the surrounding text colour; and
-`segments()`, which renders a string or a list of `{ text, style }`. In the split
+`segments()`, which renders a string or a list of `{ text, style }`. `_gems.js` draws
+the gems; the gem layouts pull it into their script with a Jinja include. In the split
 layouts' scripts, `esc()` escapes text written into markup.
 
 If a `.fit` line still overflows at the smallest size, `card.py` stops with an error

@@ -1,0 +1,80 @@
+{% extends "_split.html" %}
+{# gem-log layout: bases skipped until one holds a gem gem_target picks. Fields are in
+   ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .lit svg { filter: drop-shadow(0 0 10px color-mix(in srgb, var(--accent-from) 55%, transparent)); }
+  .panel { gap: 12px; }
+  .base {
+    display: grid;
+    grid-template-columns: 52px 1fr auto;
+    align-items: center;
+    padding: 8px 18px;
+    border-radius: 12px;
+    background: #161b22;
+    border: 1px solid var(--line);
+    font: 19px "DejaVu Sans Mono", monospace;
+    color: var(--muted);
+  }
+  .base .gems { display: flex; gap: 8px; }
+  .base.skipped { opacity: 0.6; }
+  .base.hit {
+    padding: 12px 18px;
+    border: 2px solid var(--accent-from);
+    background: color-mix(in srgb, var(--accent-from) 10%, #161b22);
+  }
+  .base .verdict { font-size: 19px; }
+  .base.hit .verdict { font-size: 22px; font-weight: bold; color: var(--accent-from); }
+{% endblock %}
+
+{% block art %}
+  <div class="panel">
+    {% for base in (bases or [])[:5] %}
+    <div class="base"><span>#{{ loop.index }}</span><span class="gems">{% for code in base %}<span data-gem="{{ code }}"></span>{% endfor %}</span><span class="verdict"></span></div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+{% block script %}
+  {% include "_gems.js" %}
+
+  // Skip bases until the first that holds a targeted gem; later bases are never reached.
+  function drawLog() {
+    const rules = parseGemTarget({{ gem_target | default("") | tojson }});
+    let found = false;
+    for (const base of document.querySelectorAll(".base")) {
+      const slots = [...base.querySelectorAll("[data-gem]")];
+      const hit = found ? null : slots.find((el) => gemMatches(el.dataset.gem, rules));
+      for (const el of slots) {
+        el.dataset.size = hit ? 58 : 50;
+        if (el === hit) el.classList.add("lit");
+      }
+      if (found) base.remove();
+      else if (hit) {
+        base.classList.add("hit");
+        base.querySelector(".verdict").textContent = `✦ found ${hit.dataset.gem}`;
+        found = true;
+      } else {
+        base.classList.add("skipped");
+        base.querySelector(".verdict").textContent = "skip ›";
+      }
+    }
+    drawGems();
+  }
+
+  window.cardReady = document.fonts.ready.then(() => { fitText(); drawLog(); });
+{% endblock %}

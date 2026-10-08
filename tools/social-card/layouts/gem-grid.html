@@ -1,0 +1,58 @@
+{% extends "_split.html" %}
+{# gem-grid layout: every gem, colour by tier, with the ones gem_target picks lit.
+   Fields are in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .lit svg { filter: drop-shadow(0 0 10px color-mix(in srgb, var(--accent-from) 55%, transparent)); }
+  .panel { gap: 12px; }
+  .target { font: 20px "DejaVu Sans Mono", monospace; color: var(--muted); }
+  .target b { color: var(--accent-from); }
+  .tiers, .grid { display: grid; grid-template-columns: repeat(8, 1fr); }
+  .tiers { font: 16px "DejaVu Sans Mono", monospace; color: var(--muted); text-align: center; }
+  .grid { row-gap: 6px; }
+  .cell { display: grid; place-items: center; }
+  .cell.dim { opacity: 0.2; filter: grayscale(0.7); }
+  .caption { font: 18px "DejaVu Sans Mono", monospace; color: var(--muted); }
+  .caption b { color: var(--fg); }
+{% endblock %}
+
+{% block art %}
+  <div class="panel">
+    {% if gem_target %}<div class="target">--gems <b>{{ gem_target }}</b></div>{% endif %}
+    <div class="tiers">{% for tier in range(1, 9) %}<span>{{ tier }}</span>{% endfor %}</div>
+    <div class="grid">
+      {% for colour in "rbygp" %}{% for tier in range(1, 9) %}<div class="cell" data-gem="{{ colour }}{{ tier }}" data-size="66"></div>{% endfor %}{% endfor %}
+    </div>
+    {% if gem_target %}<div class="caption"></div>{% endif %}
+  </div>
+{% endblock %}
+
+{% block script %}
+  {% include "_gems.js" %}
+
+  function drawGrid() {
+    const rules = parseGemTarget({{ gem_target | default("") | tojson }});
+    drawGems();
+    for (const cell of document.querySelectorAll(".cell")) {
+      cell.classList.add(gemMatches(cell.dataset.gem, rules) ? "lit" : "dim");
+    }
+    const caption = document.querySelector(".caption");
+    if (caption) caption.innerHTML = `pauses on ${describeGemTarget(rules, (w) => `<b>${esc(w)}</b>`)}`;
+  }
+
+  window.cardReady = document.fonts.ready.then(() => { fitText(); drawGrid(); });
+{% endblock %}
