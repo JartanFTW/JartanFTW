@@ -38,10 +38,31 @@ jobs:
           curl -L "https://streak-stats.demolab.com/?user=${{ github.repository_owner }}&theme=darcula" \
             -o profile/streak.svg
 
+      # A custom social preview gets a new URL on every upload, so the README can't
+      # link it statically. Repos without one keep the stable auto-generated URL: the
+      # one the API returns carries a hash that changes daily.
+      - name: Refresh project preview links
+        continue-on-error: true  # a failed lookup must not block the stats cards
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          grep -oE 'href="https://github\.com/[^/"]+/[^/"]+"><img src="[^"]*"' README.md |
+            sed -E 's|href="https://github\.com/([^/"]+)/([^/"]+)"><img src="([^"]*)"|\1 \2 \3|' |
+            while read -r owner repo current; do
+              custom=$(gh api graphql \
+                -f query="{ repository(owner: \"$owner\", name: \"$repo\") { usesCustomOpenGraphImage openGraphImageUrl } }" \
+                --jq '.data.repository | if .usesCustomOpenGraphImage then .openGraphImageUrl else empty end')
+              want=${custom:-https://opengraph.githubassets.com/1/$owner/$repo}
+              if [ "$current" != "$want" ]; then
+                CURRENT="$current" WANT="$want" perl -i -pe 's/\Q$ENV{CURRENT}\E/$ENV{WANT}/' README.md
+                echo "$owner/$repo -> $want"
+              fi
+            done
+
       - name: Commit cards
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add profile/*.svg
+          git add profile/*.svg README.md
           git commit -m "Update README cards" || exit 0
           git push
