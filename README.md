@@ -103,12 +103,12 @@ As does fine dust thrown up against the wind<!--QUOTE_TEXT_END--></i></p>
 <p align="center">
   <a href="https://github.com/Jartan-LLC/scaffold"><img src="https://repository-images.githubusercontent.com/1268717504/ded337ea-d38a-4c86-8c4a-c1b03635a589" width="48%" alt="scaffold"/></a>
   <a href="https://github.com/Jartan-LLC/enchantments"><img src="https://repository-images.githubusercontent.com/1396627351/48408172-719e-413c-84ef-c2132c5ee510" width="48%" alt="enchantments"/></a>
-  <a href="https://github.com/Jartan-LLC/grimoire"><img src="https://repository-images.githubusercontent.com/1272679886/39f567a4-161f-442f-b709-41f5a41cba29" width="48%" alt="grimoire"/></a>
-  <a href="https://github.com/Jartan-LLC/claude-sync"><img src="https://opengraph.githubassets.com/1/Jartan-LLC/claude-sync" width="48%" alt="claude-sync"/></a>
-  <a href="https://github.com/Jartan-LLC/memcp"><img src="https://opengraph.githubassets.com/1/Jartan-LLC/memcp" width="48%" alt="memcp"/></a>
-  <a href="https://github.com/Jartan-LLC/sonde"><img src="https://opengraph.githubassets.com/1/Jartan-LLC/sonde" width="48%" alt="sonde"/></a>
-  <a href="https://github.com/JartanFTW/Trade-Notifier"><img src="https://opengraph.githubassets.com/1/JartanFTW/Trade-Notifier" width="48%" alt="Trade-Notifier"/></a>
-  <a href="https://github.com/JartanFTW/kot-skipper"><img src="https://opengraph.githubassets.com/1/JartanFTW/kot-skipper" width="48%" alt="kot-skipper"/></a>
+  <a href="https://github.com/Jartan-LLC/grimoire"><img src="https://repository-images.githubusercontent.com/1272679886/5d626b99-f2d1-4dce-9a89-7de979c52ea3" width="48%" alt="grimoire"/></a>
+  <a href="https://github.com/Jartan-LLC/claude-sync"><img src="https://repository-images.githubusercontent.com/1409427186/fdacedae-89fa-4fa1-8985-2797ae89fc78" width="48%" alt="claude-sync"/></a>
+  <a href="https://github.com/Jartan-LLC/memcp"><img src="https://repository-images.githubusercontent.com/1268778663/54e708d7-907a-404e-920b-d22e04dad971" width="48%" alt="memcp"/></a>
+  <a href="https://github.com/Jartan-LLC/sonde"><img src="https://repository-images.githubusercontent.com/1286559325/af24c5c0-e844-4c99-a963-778e55d4a03f" width="48%" alt="sonde"/></a>
+  <a href="https://github.com/JartanFTW/Trade-Notifier"><img src="https://repository-images.githubusercontent.com/330734960/72f07733-ef7b-4ed6-992a-416967a9bd55" width="48%" alt="Trade-Notifier"/></a>
+  <a href="https://github.com/JartanFTW/kot-skipper"><img src="https://repository-images.githubusercontent.com/496042004/9e4375b6-dd5f-4aa4-9f2f-b0ca02cb2e49" width="48%" alt="kot-skipper"/></a>
 </p>
 
 ---
