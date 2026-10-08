@@ -1,0 +1,82 @@
+{% extends "_split.html" %}
+{# chart layout: the [chart] table and [style] keys are in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .chart text { font-family: "DejaVu Sans Mono", monospace; }
+  .chart .grid { stroke: var(--line); stroke-width: 1; }
+  .chart .tick, .chart .axis { font-size: 17px; fill: var(--muted); }
+  .chart .zone { fill: color-mix(in srgb, var(--critical) 12%, transparent); }
+  .chart .zone-label { font-size: 19px; font-weight: bold; fill: var(--critical); }
+  .chart .series { fill: none; stroke: var(--accent-from); stroke-width: 3; stroke-linejoin: round; }
+  .chart .point { fill: var(--accent-from); stroke: var(--bg); stroke-width: 2; }
+  .chart .point.in-zone { fill: var(--critical); }
+  .chart .marker { stroke: var(--success); stroke-width: 2.5; stroke-dasharray: 7 6; }
+  .chart .marker-label { font-size: 18px; fill: var(--muted); }
+  .chart .marker-value { font-size: 26px; font-weight: bold; fill: var(--fg); }
+{% endblock %}
+
+{% block art %}<div class="panel"><svg class="chart" width="600" height="560"></svg></div>{% endblock %}
+
+{% block script %}
+  const CHART = {{ chart | default(none) | tojson }};
+  const PLOT = { left: 90, right: 560, top: 110, bottom: 420 };  // inside the panel
+
+  // One series of [x, y] points. Points past zone.from are drawn in the
+  // critical colour, and the zone carries its own label, so colour is never alone.
+  function drawChart() {
+    const scale = CHART.log_x ? Math.log2 : (v) => v;
+    const xs = CHART.points.map(([x]) => scale(x));
+    const xMin = Math.min(...xs), xMax = Math.max(...xs);
+    const yMax = CHART.y_max ?? Math.max(...CHART.points.map(([, y]) => y));
+    const px = (v) => PLOT.left + ((scale(v) - xMin) / (xMax - xMin)) * (PLOT.right - PLOT.left);
+    const py = (v) => PLOT.bottom - (v / yMax) * (PLOT.bottom - PLOT.top);
+    const zone = CHART.zone, marker = CHART.marker;
+    const midY = py(yMax / 2);
+    let svg = "";
+
+    if (zone) {
+      const x = px(zone.from);
+      svg += `<rect class="zone" x="${x}" y="${PLOT.top - 20}" width="${PLOT.right - x + 10}" height="${PLOT.bottom - PLOT.top + 20}"/>`;
+      if (zone.label) {
+        svg += `<text class="zone-label" x="${(x + PLOT.right) / 2 + 5}" y="${PLOT.top + 6}" text-anchor="middle">${esc(zone.label)}</text>`;
+      }
+    }
+    for (const v of CHART.y_ticks ?? []) {
+      svg += `<line class="grid" x1="${PLOT.left}" x2="${PLOT.right}" y1="${py(v)}" y2="${py(v)}"/>`;
+      svg += `<text class="tick" x="${PLOT.left - 12}" y="${py(v) + 6}" text-anchor="end">${esc(v)}${esc(CHART.y_suffix ?? "")}</text>`;
+    }
+    for (const v of CHART.x_ticks ?? []) {
+      svg += `<text class="tick" x="${px(v)}" y="${PLOT.bottom + 30}" text-anchor="middle">${esc(v)}</text>`;
+    }
+    if (CHART.x_label) {
+      svg += `<text class="axis" x="${(PLOT.left + PLOT.right) / 2}" y="${PLOT.bottom + 62}" text-anchor="middle">${esc(CHART.x_label)}</text>`;
+    }
+    if (CHART.y_label) svg += `<text class="axis" x="${PLOT.left}" y="${PLOT.top - 44}">${esc(CHART.y_label)}</text>`;
+    if (marker) {
+      const x = px(marker.at);
+      svg += `<line class="marker" x1="${x}" x2="${x}" y1="${PLOT.top - 20}" y2="${PLOT.bottom}"/>`;
+      if (marker.label) svg += `<text class="marker-label" x="${x - 12}" y="${midY + 4}" text-anchor="end">${esc(marker.label)}</text>`;
+      if (marker.value) svg += `<text class="marker-value" x="${x - 12}" y="${midY + 36}" text-anchor="end">${esc(marker.value)}</text>`;
+    }
+
+    const points = CHART.points.map(([x, y]) => `${px(x)},${py(y)}`).join(" ");
+    svg += `<polyline class="series" points="${points}"/>`;
+    svg += CHART.points.map(([x, y]) => {
+      const inZone = zone && x > zone.from ? " in-zone" : "";
+      return `<circle class="point${inZone}" cx="${px(x)}" cy="${py(y)}" r="5.5"/>`;
+    }).join("");
+    document.querySelector(".chart").innerHTML = svg;
+  }
+
+  window.cardReady = document.fonts.ready.then(() => { fitText(); if (CHART) drawChart(); });
+{% endblock %}

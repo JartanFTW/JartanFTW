@@ -20,6 +20,8 @@
     --accent-from: #db61a2;
     --accent-to: #a371f7;
     --success: #3fb950;
+    --warning: #d29922;
+    --critical: #f85149;
     --margin: 72px;  /* social sites crop the edges */
   }
 
@@ -77,6 +79,9 @@
   {% endif %}
 
   <script>
+    // Escape text a layout's script writes into markup.
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
     // Shrink each .fit line until it fits its column; CSS can't size text to fit.
     const fitText = () => {
       for (const el of document.querySelectorAll(".fit")) {

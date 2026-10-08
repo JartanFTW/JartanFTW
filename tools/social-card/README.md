@@ -74,9 +74,9 @@ Footer styles: `muted` (default), `fg`, `string`, `success`.
 `[style]` keys: `leather`, `leather-edge`, `cover`, `parchment`, `parchment-edge`,
 `page-stack`, `ink`, `ink-faded`, `rubric`, `gold`, `sigil-size`.
 
-### recall, recall-constellation, constellation, index-cards, devices, matrix
+### recall, recall-constellation, constellation, index-cards, devices, matrix, chart, terminal, gauge
 
-Six layouts that share a dark text column on the left: owner, name with
+Nine layouts that share a dark text column on the left: owner, name with
 `name_accent` in a gradient, headline, description and footer. Each draws something
 different on the right.
 
@@ -105,6 +105,16 @@ different on the right.
   icon.
 - **matrix** sets the same `tree` against up to four `devices`, a check in every
   cell.
+- **chart** plots one series from a `[chart]` table: `points` as `[x, y]` pairs,
+  `x_ticks`, `y_ticks`, `y_max`, `y_suffix`, `x_label`, `y_label` and `log_x`. An
+  optional `zone = { from, label }` shades everything past `from` in the critical
+  colour, and `marker = { at, label, value }` draws a dashed line with its value.
+- **terminal** shows a `[run]`: a `command`, `steps` (`{ name, result, failed }`) and
+  an outcome box (`outcome_label`, `outcome` and `outcome_detail`, each a string or
+  footer-style segments).
+- **gauge** draws a `[gauge]` dial from `min` (default 0) to `max`, with `tick_step`,
+  a needle at `value` (shown as `value_text` if given), a `caption`, and `bands`, each
+  `{ to, style, label }` with `style` one of `good`, `warning`, `critical`.
 
 The two constellation layouts scatter their stars from a fixed `seed` (a whole
 number), so a render is repeatable; set it in the content file to try another
@@ -114,7 +124,7 @@ Footer styles: `muted` (default), `fg`, `accent-text`, `success`.
 
 `[style]` keys: `bg`, `glow`, `fg`, `muted`, `line`, `accent-from`, `accent-to`,
 `success`; constellation adds `hub-size`, `link`, `node-glow`; recall-constellation
-adds `link`, `node-glow`, `panel-fill`; devices adds `window`, `link-color`; index-cards adds
+adds `link`, `node-glow`, `panel-fill`; devices adds `window`, `link-color`; all share `warning` and `critical` for status; index-cards adds
 `card-paper`, `card-rule`, `card-ink`, `card-label`.
 
 ### Writing a layout
@@ -132,8 +142,13 @@ to `window.cardReady`; the screenshot waits for it.
 
 Bundled layouts stay on the template search path, so a layout kept anywhere can
 `{% extends "_split.html" %}` (or any bundled layout) and override its `style`, `art`
-and `script` blocks. `_macros.html` holds drawings shared between layouts: `check()`
-and `glyph()`, which draws a single-colour icon in the surrounding text colour.
+and `script` blocks. `_macros.html` holds pieces shared between layouts: `check()`;
+`glyph()`, which draws a single-colour icon in the surrounding text colour; and
+`segments()`, which renders a string or a list of `{ text, style }`. In the split
+layouts' scripts, `esc()` escapes text written into markup.
+
+If a `.fit` line still overflows at the smallest size, `card.py` stops with an error
+naming the text rather than writing a card with it cut off.
 
 ## Fonts
 

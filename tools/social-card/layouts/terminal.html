@@ -1,0 +1,64 @@
+{% extends "_split.html" %}
+{% from "_macros.html" import segments %}
+{# terminal layout: the [run] table and [style] keys are in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 22px 32px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    font-family: "DejaVu Sans Mono", monospace;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .lights { display: flex; gap: 8px; }
+  .lights i { width: 13px; height: 13px; border-radius: 50%; background: var(--line); }
+  .body { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+  .command { font-size: 19px; color: var(--fg); }
+  .command .prompt { color: var(--accent-from); }
+  .step { display: grid; grid-template-columns: 26px 150px 1fr; align-items: baseline; font-size: 19px; }
+  .step .mark { color: var(--success); }
+  .step.failed .mark { color: var(--critical); }
+  .step .phase { font-weight: bold; color: var(--fg); }
+  .step .result { color: var(--muted); }
+  .outcome {
+    margin-top: 8px;
+    padding: 18px 22px;
+    border-radius: 12px;
+    border: 1.5px solid var(--accent-from);
+    background: color-mix(in srgb, var(--accent-from) 8%, transparent);
+  }
+  .outcome .label { font-size: 16px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-from); }
+  .outcome .headline { font: 30px "Noto Sans", sans-serif; margin-top: 6px; }
+  .outcome .detail { font-size: 19px; color: var(--muted); margin-top: 6px; }
+  .outcome .accent-text { color: var(--accent-from); font-weight: bold; }
+  .outcome .fg { color: var(--fg); font-weight: bold; }
+{% endblock %}
+
+{% block art %}
+  {% if run %}
+  <div class="panel">
+    <div class="lights"><i></i><i></i><i></i></div>
+    <div class="body">
+      {% if run.command %}<div class="command"><span class="prompt">$</span> {{ run.command }}</div>{% endif %}
+      {% for step in run.steps or [] %}
+      <div class="step{{ ' failed' if step.failed }}"><span class="mark">{{ '✗' if step.failed else '✓' }}</span><span class="phase">{{ step.name }}</span><span class="result">{{ step.result }}</span></div>
+      {% endfor %}
+      {% if run.outcome %}
+      <div class="outcome">
+        {% if run.outcome_label %}<div class="label">{{ run.outcome_label }}</div>{% endif %}
+        <div class="headline">{{ segments(run.outcome) }}</div>
+        {% if run.outcome_detail %}<div class="detail">{{ segments(run.outcome_detail) }}</div>{% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}

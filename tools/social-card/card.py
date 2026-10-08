@@ -20,6 +20,10 @@ from playwright.sync_api import sync_playwright
 HERE = Path(__file__).resolve().parent
 WIDTH, HEIGHT = 1280, 640  # GitHub's recommended social preview size
 CSS_NAME = re.compile(r"[a-z][a-z0-9-]*")
+# Layouts shrink .fit lines to fit; one that still overflows would be cut off.
+OVERFLOWING = """() => [...document.querySelectorAll(".fit")]
+    .filter((el) => el.scrollWidth > el.clientWidth)
+    .map((el) => el.textContent.trim())"""
 
 
 def layout_path(layout, content_dir):
@@ -80,8 +84,13 @@ def screenshot(html, out):
         page = browser.new_page(viewport={"width": WIDTH, "height": HEIGHT})
         page.goto(page_file.as_uri())
         page.evaluate("async () => { await document.fonts.ready; await window.cardReady; }")
-        page.screenshot(path=out)
+        overflowing = page.evaluate(OVERFLOWING)
+        if not overflowing:
+            page.screenshot(path=out)
         browser.close()
+    if overflowing:
+        lines = "\n".join(f"  {text!r}" for text in overflowing)
+        raise SystemExit(f"text too long to fit, even at the smallest size:\n{lines}")
 
 
 def main():

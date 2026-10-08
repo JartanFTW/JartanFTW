@@ -1,4 +1,5 @@
 {% extends "_split.html" %}
+{% from "_macros.html" import segments %}
 {# recall layout: fields, sessions format and [style] keys are in ../README.md #}
 
 {% block style %}
@@ -44,10 +45,6 @@
   .tool .result { color: var(--accent-to); font-size: 19px; }
   .tool .result.success { color: var(--success); }
 {% endblock %}
-
-{% macro segments(value) -%}
-  {%- if value is string %}{{ value }}{% else %}{% for s in value %}<span class="{{ s.style | default('') }}">{{ s.text }}</span>{% endfor %}{% endif -%}
-{%- endmacro %}
 
 {% block art %}
   {% if sessions %}

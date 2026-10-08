@@ -1,0 +1,76 @@
+{% extends "_split.html" %}
+{# gauge layout: the [gauge] table and [style] keys are in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .dial text { font-family: "DejaVu Sans Mono", monospace; }
+  .dial .band { fill: none; stroke-width: 26; }
+  .dial .band.good { stroke: var(--success); }
+  .dial .band.warning { stroke: var(--warning); }
+  .dial .band.critical { stroke: var(--critical); }
+  .dial .band-label { font-size: 18px; font-weight: bold; }
+  .dial .band-label.good { fill: var(--success); }
+  .dial .band-label.warning { fill: var(--warning); }
+  .dial .band-label.critical { fill: var(--critical); }
+  .dial .tick { stroke: var(--muted); stroke-width: 2; }
+  .dial .tick-label { font-size: 17px; fill: var(--muted); }
+  .dial .needle { stroke: var(--fg); stroke-width: 5; stroke-linecap: round; }
+  .dial .pivot { fill: var(--fg); }
+  .dial .value { font: bold 64px "DejaVu Sans Mono", monospace; fill: var(--fg); }
+  .dial .caption { font-size: 19px; fill: var(--muted); }
+{% endblock %}
+
+{% block art %}<div class="panel"><svg class="dial" width="600" height="560"></svg></div>{% endblock %}
+
+{% block script %}
+  const GAUGE = {{ gauge | default(none) | tojson }};
+  const DIAL = { x: 300, y: 300, r: 200, sweep: 240 };  // a 240° arc, open at the bottom
+
+  // Bands run from the previous band's end (or min) to their own `to`. Each band's
+  // label sits outside the arc at its midpoint, so its meaning is never colour alone.
+  function drawGauge() {
+    const min = GAUGE.min ?? 0, max = GAUGE.max;
+    const angle = (v) => ((150 + ((v - min) / (max - min)) * DIAL.sweep) * Math.PI) / 180;
+    const at = (v, r) => [DIAL.x + r * Math.cos(angle(v)), DIAL.y + r * Math.sin(angle(v))];
+    const arc = (v0, v1, r) => {
+      const [x0, y0] = at(v0, r), [x1, y1] = at(v1, r);
+      const large = ((v1 - v0) / (max - min)) * DIAL.sweep > 180 ? 1 : 0;
+      return `M${x0} ${y0} A${r} ${r} 0 ${large} 1 ${x1} ${y1}`;
+    };
+    let svg = "", from = min;
+
+    for (const band of GAUGE.bands ?? []) {
+      svg += `<path class="band ${esc(band.style)}" d="${arc(from, band.to, DIAL.r)}"/>`;
+      if (band.label) {
+        const mid = (from + band.to) / 2;
+        const [x, y] = at(mid, DIAL.r + 34);
+        const anchor = x < DIAL.x - 20 ? "end" : x > DIAL.x + 20 ? "start" : "middle";
+        svg += `<text class="band-label ${esc(band.style)}" x="${x}" y="${y + 6}" text-anchor="${anchor}">${esc(band.label)}</text>`;
+      }
+      from = band.to;
+    }
+    const step = GAUGE.tick_step ?? (max - min) / 6;
+    for (let v = min; v <= max + 1e-9; v += step) {
+      const [x0, y0] = at(v, DIAL.r - 30), [x1, y1] = at(v, DIAL.r - 16), [tx, ty] = at(v, DIAL.r - 56);
+      svg += `<line class="tick" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`;
+      svg += `<text class="tick-label" x="${tx}" y="${ty + 6}" text-anchor="middle">${+v.toFixed(2)}</text>`;
+    }
+    const [nx, ny] = at(GAUGE.value, DIAL.r - 40);
+    svg += `<line class="needle" x1="${DIAL.x}" y1="${DIAL.y}" x2="${nx}" y2="${ny}"/>`;
+    svg += `<circle class="pivot" cx="${DIAL.x}" cy="${DIAL.y}" r="14"/>`;
+    svg += `<text class="value" x="${DIAL.x}" y="${DIAL.y + 96}" text-anchor="middle">${esc(GAUGE.value_text ?? GAUGE.value)}</text>`;
+    if (GAUGE.caption) svg += `<text class="caption" x="${DIAL.x}" y="${DIAL.y + 128}" text-anchor="middle">${esc(GAUGE.caption)}</text>`;
+    document.querySelector(".dial").innerHTML = svg;
+  }
+
+  window.cardReady = document.fonts.ready.then(() => { fitText(); if (GAUGE) drawGauge(); });
+{% endblock %}
