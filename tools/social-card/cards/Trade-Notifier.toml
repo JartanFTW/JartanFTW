@@ -1,10 +1,43 @@
+layout = "trade-themes"
 owner = "JartanFTW"
 name = "Trade-Notifier"
 headline = "Know the moment a Roblox trade lands"
-description = "Sends a Discord webhook whenever you complete,\nreceive or send a trade."
+description = "Sends a Discord webhook whenever you\ncomplete, receive or send a trade."
 chips = ["Discord webhooks", "Custom themes", "Runtime-built images", "Windows & Linux"]
-icon = "Trade-Notifier.svg"  # Pinhead Map Icons, CC0
+footer = [
+  { text = "Discord", style = "fg" },
+  { text = " · " },
+  { text = "custom themes", style = "fg" },
+  { text = " · " },
+  { text = "Windows & Linux", style = "fg" },
+]
+icon = "Trade-Notifier.svg"  # Phosphor Icons handshake-fill, MIT
+
+# trade-themes and notifications. The trade and trader are made up; datafull is one of
+# the themes the repo ships (its colours), and the other two stand in for user themes.
+trade = { status = "Trade completed", partner = "with example_trader", give = { total = "R$ 47,500", items = [
+  { icon = "icons/baseball-cap.svg", value = "6,300" },
+  { icon = "icons/t-shirt.svg", value = "2,100" },
+  { icon = "icons/sword.svg", value = "18,950" },
+  { icon = "icons/crown.svg", value = "20,150" },
+] }, receive = { total = "R$ 59,550", items = [
+  { icon = "icons/crown.svg", value = "41,200" },
+  { icon = "icons/sword.svg", value = "18,350" },
+] } }
+themes = [
+  { label = "custom", card = "#f5f0e6", box = "#fffaf0", edge = "#d8cfbd", ink = "#2b2b2b", muted = "#7a6f5c", value = "#2f7d4f" },
+  { label = "custom", card = "linear-gradient(160deg, #3b1d5e, #12234a)", box = "rgb(255 255 255 / 8%)", edge = "rgb(255 255 255 / 18%)", ink = "#f0f6fc", muted = "#b8a9d9", value = "#7ee2b8" },
+  { label = "datafull", card = "#2c2f33", box = "#36393f", edge = "#40444b", ink = "#f0f6fc", muted = "#9eaaba", value = "#43b581" },
+]
+notifications = [
+  { icon = "icons/arrow-down-left.svg", app = "Horizon", time = "now", title = "Trade received", body = "example_trader offers R$ 59,550" },
+  { icon = "icons/arrow-up-right.svg", app = "Horizon", time = "2m ago", title = "Trade sent", body = "to another_trader · 3 items" },
+  { icon = "icons/check-circle.svg", app = "Horizon", time = "1h ago", title = "Trade completed", body = "with example_trader · +R$ 12,050" },
+]
 
 [style]
 tile-from = "#1a7f37"
 tile-to = "#1b7c83"
+accent-from = "#43b581"
+accent-to = "#5865f2"
+glow = "#13261e"
