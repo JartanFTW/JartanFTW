@@ -20,11 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->When a fool hates a man that has no hate,
-Is purified and free from every blemish,
-Such evil he will find comes back on him,
-As does fine dust thrown up against the wind<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Dhammapada<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->During fright, a particular image held in the mind will bring about a particular effect.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Hermes<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
