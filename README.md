@@ -85,15 +85,12 @@ As does fine dust thrown up against the wind<!--QUOTE_TEXT_END--></i></p>
 ---
 
 <p align="center">
-  <img src="./profile/streak.svg" alt="GitHub Streak" />
-</p>
-
-<p align="center">
   <img src="./profile/stats.svg" alt="GitHub Stats" />
+  <img src="./profile/top-langs.svg" alt="Top Languages" />
 </p>
 
 <p align="center">
-  <img src="./profile/top-langs.svg" alt="Top Languages" />
+  <img src="./profile/streak.svg" alt="GitHub Streak" />
 </p>
 
 ---
