@@ -101,8 +101,8 @@ As does fine dust thrown up against the wind<!--QUOTE_TEXT_END--></i></p>
 <h3 align="center">🚀 Open Source Projects 🚀</h3>
 
 <p align="center">
-  <a href="https://github.com/Jartan-LLC/scaffold"><img src="https://repository-images.githubusercontent.com/1268717504/ded337ea-d38a-4c86-8c4a-c1b03635a589" width="48%" alt="scaffold"/></a>
-  <a href="https://github.com/Jartan-LLC/enchantments"><img src="https://repository-images.githubusercontent.com/1396627351/48408172-719e-413c-84ef-c2132c5ee510" width="48%" alt="enchantments"/></a>
+  <a href="https://github.com/Jartan-LLC/scaffold"><img src="https://repository-images.githubusercontent.com/1268717504/e47e9e34-fafe-4e1a-a189-74e6e7ef7cfd" width="48%" alt="scaffold"/></a>
+  <a href="https://github.com/Jartan-LLC/enchantments"><img src="https://repository-images.githubusercontent.com/1396627351/0004e85f-6f50-4169-b9f5-cbf3aff67c29" width="48%" alt="enchantments"/></a>
   <a href="https://github.com/Jartan-LLC/grimoire"><img src="https://repository-images.githubusercontent.com/1272679886/5d626b99-f2d1-4dce-9a89-7de979c52ea3" width="48%" alt="grimoire"/></a>
   <a href="https://github.com/Jartan-LLC/claude-sync"><img src="https://repository-images.githubusercontent.com/1409427186/fdacedae-89fa-4fa1-8985-2797ae89fc78" width="48%" alt="claude-sync"/></a>
   <a href="https://github.com/Jartan-LLC/memcp"><img src="https://repository-images.githubusercontent.com/1268778663/54e708d7-907a-404e-920b-d22e04dad971" width="48%" alt="memcp"/></a>
