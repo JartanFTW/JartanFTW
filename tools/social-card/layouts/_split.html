@@ -48,6 +48,10 @@
   }
   .headline { font: bold 40px/1.2 "Noto Sans", sans-serif; margin-top: 14px; white-space: nowrap; }
   .description { font: 27px/1.4 "Noto Sans", sans-serif; color: var(--muted); margin-top: 12px; white-space: pre-line; }
+  .text-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .text-chips span { padding: 7px 14px; border-radius: 999px; font: bold 17px "Noto Sans", sans-serif;
+    background: #161b22; border: 1.5px solid var(--line); }
+  .text-chips span::before { content: "✓ "; color: var(--success); }
 
   /* a long command shrinks rather than running into the art on the right */
   .footer { position: absolute; left: var(--margin); bottom: 56px; max-width: 540px; overflow: hidden;
@@ -72,6 +76,7 @@
     <div class="name fit">{% if at >= 0 %}{{ name[:at] }}<span class="accent">{{ name_accent }}</span>{{ name[at + name_accent | length:] }}{% else %}{{ name }}{% endif %}</div>
     {% if headline %}<div class="headline fit">{{ headline }}</div>{% endif %}
     {% if description %}<div class="description">{{ description }}</div>{% endif %}
+    {% if show_chips and chips %}<div class="text-chips">{% for chip in chips %}<span>{{ chip }}</span>{% endfor %}</div>{% endif %}
   </div>
 
   {% if footer %}

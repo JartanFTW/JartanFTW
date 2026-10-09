@@ -45,6 +45,7 @@ the rest. `cards/` has worked examples.
 | `icon` | path | SVG or PNG, relative to the content file. Any `icon` key in a nested table is resolved the same way |
 | `name_accent` | string | Part of `name` to highlight, in layouts that support it |
 | `chips_title` | string | Heading over the chips, in layouts that show one |
+| `show_chips` | boolean | In the split layouts, also list `chips` under the description |
 | `[style]` | table | Overrides for the layout's CSS custom properties, without the `--`: `tile-from = "#1a7f37"` sets `--tile-from` |
 
 ## Layouts
