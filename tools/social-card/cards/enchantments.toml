@@ -16,6 +16,33 @@ checklist = { title = "in every container", items = [
   "your env vars and GitHub login",
 ] }
 
+# before-after, streak, rune-circle, catalogue and combine
+before_after = { title = "after every rebuild", before = { label = "without enchantments", items = [
+  "log in to Claude Code again", "log in to the GitHub CLI again", "re-export your env vars", "reinstall plugins and tools",
+] }, after = { label = "with enchantments", items = [
+  "still logged in to Claude Code", "still logged in to the GitHub CLI", "env vars still set", "plugins and tools still there",
+] } }
+streak = { rows = [
+  { label = "rebuild #10", status = "✓" }, { label = "rebuild #11", status = "✓" }, { label = "rebuild #12", status = "✓" },
+  { label = "rebuild #13", status = "✓" }, { label = "rebuild #14", status = "✓ logged in · plugins ready" },
+] }
+runes = ["claude-code", "codebase-memory-mcp", "container-env", "gh-config", "grimoire", "liza", "liza-toolchain"]
+catalogue = [
+  { name = "claude-code", icon = "icons/terminal-window.svg", note = "Claude Code, login kept" },
+  { name = "codebase-memory-mcp", icon = "icons/graph.svg", note = "a code graph to query" },
+  { name = "container-env", icon = "icons/key.svg", note = "per-device env vars" },
+  { name = "gh-config", icon = "icons/github-logo.svg", note = "gh login kept" },
+  { name = "grimoire", icon = "icons/book-open.svg", note = "Claude Code plugins" },
+  { name = "liza", icon = "icons/users-three.svg", note = "multi-agent workflow" },
+  { name = "liza-toolchain", icon = "icons/magnifying-glass.svg", note = "code indexes + search" },
+]
+
+[combine]
+input = { icon = "icons/cube.svg", label = "dev container" }
+modifier = { icon = "icons/book-open.svg", label = "enchantments" }
+result = { icon = "icons/cube.svg", label = "enchanted" }
+tags = ["claude-code", "codebase-memory-mcp", "container-env", "gh-config", "grimoire", "liza", "liza-toolchain"]
+
 [style]
 tile-from = "#8957e5"
 tile-to = "#1f6feb"
