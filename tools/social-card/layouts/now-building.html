@@ -1,0 +1,86 @@
+<!doctype html>
+<!-- now-building layout: a small "currently building" plate in Merlin's Atlas dark
+     theme. Fields and [style] keys are in ../README.md. Drawn at 640x390 to be shown
+     at half size beside the stats cards. -->
+<html style="{{ style_vars }}">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "EB Garamond"; font-weight: 400 800; src: url("{{ fonts }}/EBGaramond.ttf"); }
+  @font-face { font-family: "EB Garamond"; font-style: italic; font-weight: 400 800; src: url("{{ fonts }}/EBGaramond-Italic.ttf"); }
+  @font-face { font-family: "Noto Sans"; src: url("{{ fonts }}/NotoSans-Regular.ttf"); }
+  @font-face { font-family: "Noto Sans"; font-weight: bold; src: url("{{ fonts }}/NotoSans-Bold.ttf"); }
+  @font-face { font-family: "DejaVu Sans Mono"; src: url("{{ fonts }}/DejaVuSansMono.ttf"); }
+
+  /* Atlas dark ("the same book read at night"), from Merlin's theme.css */
+  :root {
+    --background: oklch(0.19 0.015 67);
+    --plate: oklch(0.225 0.02 63.4);
+    --ink: oklch(0.919 0.028 83.5);
+    --muted: oklch(0.76 0.036 77.5);
+    --ember: oklch(0.7 0.13 48);
+    --hairline: oklch(0.372 0.028 71.1);
+    --tracking-caps: 0.16em;
+    --radius: 12px;
+    --grain: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='240'%20height='240'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.8'%20numOctaves='2'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='matrix'%20values='0%200%200%200%200.93%200%200%200%200%200.89%200%200%200%200%200.81%200%200%200%200.04%200'/%3E%3C/filter%3E%3Crect%20width='240'%20height='240'%20filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    width: 640px;
+    height: 390px;
+    overflow: hidden;
+    background: var(--background);
+  }
+
+  .plate {
+    height: 100%;
+    padding: 30px 36px 28px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--hairline);
+    border-radius: var(--radius);
+    color: var(--ink);
+    background:
+      var(--grain),
+      repeating-linear-gradient(180deg, transparent 0 3px, oklch(0.919 0.028 83.5 / 1.5%) 3px 4px),
+      var(--plate);
+  }
+
+  .overline { font: bold 17px "Noto Sans", sans-serif; letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--ember); }
+  .name { font: 600 72px/1 "EB Garamond", serif; margin-top: 8px; white-space: nowrap; }
+  /* the double rule under the masthead */
+  .rule { height: 5px; margin: 14px 0 16px; border-top: 1.5px solid var(--hairline); border-bottom: 1.5px solid var(--hairline); }
+  .pitch { font: italic 25px/1.28 "EB Garamond", serif; color: var(--ink); white-space: pre-line; }
+
+  .foot { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  /* Ember marks badges as an outline, never a fill */
+  .tags span { padding: 3px 12px; border-radius: 999px; border: 1.5px solid var(--ember);
+    font: 17px "Noto Sans", sans-serif; color: var(--ink); }
+  .facts { font: 16px "DejaVu Sans Mono", monospace; color: var(--muted); white-space: nowrap; }
+</style>
+</head>
+<body>
+  <div class="plate">
+    {% if overline %}<div class="overline">{{ overline }}</div>{% endif %}
+    <div class="name">{{ name }}</div>
+    <div class="rule"></div>
+    {% if pitch %}<div class="pitch">{{ pitch }}</div>{% endif %}
+    <div class="foot">
+      {% if tags %}<div class="tags">{% for tag in tags %}<span>{{ tag }}</span>{% endfor %}</div>{% endif %}
+      {% if facts %}<div class="facts fit">{{ facts | join("  ·  ") }}</div>{% endif %}
+    </div>
+  </div>
+  <script>
+    // Shrink each .fit line until it fits; CSS can't size text to fit.
+    window.cardReady = document.fonts.ready.then(() => {
+      for (const el of document.querySelectorAll(".fit")) {
+        let size = parseFloat(getComputedStyle(el).fontSize);
+        while (el.scrollWidth > el.clientWidth && size > 10) el.style.fontSize = `${(size -= 1)}px`;
+      }
+    });
+  </script>
+</body>
+</html>

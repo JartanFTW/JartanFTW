@@ -35,6 +35,7 @@ the rest. `cards/` has worked examples.
 
 | Field | Type | Meaning |
 |-------|------|---------|
+| `size` | `[width, height]` | Canvas size in pixels. Default `[1280, 640]`, the social preview size |
 | `layout` | string | A layout in `layouts/` by name, or a path to an `.html` file relative to the content file. Default `showcase` |
 | `owner` | string | Account or organization |
 | `name` | string | Repository name |
@@ -162,6 +163,14 @@ Footer styles: `muted` (default), `fg`, `accent-text`, `success`.
 adds `link`, `node-glow`, `panel-fill`; devices adds `window`, `link-color`; all share `warning` and `critical` for status; index-cards adds
 `card-paper`, `card-rule`, `card-ink`, `card-label`.
 
+### now-building
+
+A small "currently building" plate in Merlin's Atlas dark theme, for a profile README
+rather than a repository: drawn at 640×390 (set `size = [640, 390]`) to be shown at
+half size. Fields: `overline`, `name`, `pitch`, `tags` and `facts` (joined with
+` · `). `[style]` keys: `background`, `plate`, `ink`, `muted`, `ember`, `hairline`,
+`radius`.
+
 ### Writing a layout
 
 A layout is a [Jinja](https://jinja.palletsprojects.com/) template rendered at
@@ -189,6 +198,6 @@ naming the text rather than writing a card with it cut off.
 ## Fonts
 
 `fonts/` bundles Noto Sans ([OFL](fonts/NotoSans-OFL.txt)), Cinzel
-([OFL](fonts/Cinzel-OFL.txt)), EB Garamond Italic ([OFL](fonts/EBGaramond-OFL.txt))
+([OFL](fonts/Cinzel-OFL.txt)), EB Garamond and EB Garamond Italic ([OFL](fonts/EBGaramond-OFL.txt))
 and DejaVu Sans Mono ([licence](fonts/DejaVu-LICENSE.txt)) so cards render the same on
 every machine.

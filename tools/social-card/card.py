@@ -18,7 +18,7 @@ import jinja2
 from playwright.sync_api import sync_playwright
 
 HERE = Path(__file__).resolve().parent
-WIDTH, HEIGHT = 1280, 640  # GitHub's recommended social preview size
+SIZE = (1280, 640)  # GitHub's recommended social preview size; a card's `size` overrides it
 CSS_NAME = re.compile(r"[a-z][a-z0-9-]*")
 # Layouts shrink .fit lines to fit; one that still overflows would be cut off.
 OVERFLOWING = """() => [...document.querySelectorAll(".fit")]
@@ -56,6 +56,7 @@ def resolve_icons(value, base):
 
 
 def render_html(content_file, layout_override=None):
+    """Return the card's HTML and its (width, height)."""
     content = tomllib.loads(content_file.read_text())
     content_dir = content_file.parent
     layout = layout_path(content.pop("layout", "showcase"), content_dir)
@@ -64,6 +65,7 @@ def render_html(content_file, layout_override=None):
     if not layout.is_file():
         raise SystemExit(f"layout not found: {layout}")
 
+    width, height = content.pop("size", SIZE)
     content = resolve_icons(content, content_dir)
     content["style_vars"] = style_vars(content.pop("style", {}))
     content["fonts"] = (HERE / "fonts").as_uri()
@@ -71,17 +73,17 @@ def render_html(content_file, layout_override=None):
     # The bundled layouts stay on the search path so a custom layout can extend their bases.
     loader = jinja2.FileSystemLoader([layout.parent, HERE / "layouts"])
     env = jinja2.Environment(loader=loader, autoescape=True)
-    return env.get_template(layout.name).render(content)
+    return env.get_template(layout.name).render(content), (width, height)
 
 
-def screenshot(html, out):
+def screenshot(html, size, out):
     # Loaded from a file:// page so the layout can reach local fonts and icons.
     with tempfile.TemporaryDirectory() as tmp, sync_playwright() as p:
         page_file = Path(tmp) / "card.html"
         page_file.write_text(html)
         # CSS masks are fetched with CORS, which Chromium refuses between file:// URLs.
         browser = p.chromium.launch(args=["--allow-file-access-from-files"])
-        page = browser.new_page(viewport={"width": WIDTH, "height": HEIGHT})
+        page = browser.new_page(viewport={"width": size[0], "height": size[1]})
         page.goto(page_file.as_uri())
         page.evaluate("async () => { await document.fonts.ready; await window.cardReady; }")
         overflowing = page.evaluate(OVERFLOWING)
@@ -103,7 +105,8 @@ def main():
     suffix = f"-{Path(args.layout).stem}" if args.layout else ""
     out = args.out or HERE / "out" / f"{args.content.stem}{suffix}.png"
     out.parent.mkdir(parents=True, exist_ok=True)
-    screenshot(render_html(args.content.resolve(), args.layout), out)
+    html, size = render_html(args.content.resolve(), args.layout)
+    screenshot(html, size, out)
     print(out)
 
 
