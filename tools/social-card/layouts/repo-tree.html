@@ -1,0 +1,42 @@
+{% extends "_split.html" %}
+{# repo-tree layout: a file tree, each path with a note on what it gives you. Fields are
+   in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .panel { gap: 4px; }
+  .row { display: grid; grid-template-columns: 264px 1fr; align-items: center; gap: 14px; height: 52px; padding: 0 14px; border-radius: 10px; }
+  .row > * { white-space: nowrap; overflow: hidden; }
+  .path { font: 18px "DejaVu Sans Mono", monospace; color: var(--fg); }
+  .note { font: 17px "DejaVu Sans Mono", monospace; color: var(--muted); }
+  .note::before { content: "✓ "; color: var(--success); font-weight: bold; }
+  .root .path { color: var(--accent-from); font-weight: bold; }
+  .marked { background: color-mix(in srgb, var(--accent-to) 12%, transparent); border: 1.5px dashed var(--accent-to); }
+  .marked .note::before { content: "→ "; color: var(--accent-to); }
+{% endblock %}
+
+{% block art %}
+  <div class="panel">
+    {% if tree_root %}<div class="row root"><span class="path">{{ tree_root }}</span></div>{% endif %}
+    {% for item in (tree or [])[:9] %}
+      {% set entry = item if item is mapping else {"path": item} %}
+      <div class="row{{ ' marked' if entry.mark }}">
+        <span class="path fit">{{ "└" if loop.last else "├" }} {{ entry.path }}</span>
+        {% if entry.note %}<span class="note fit">{{ entry.note }}</span>{% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

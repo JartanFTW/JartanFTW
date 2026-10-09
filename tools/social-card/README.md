@@ -74,9 +74,9 @@ Footer styles: `muted` (default), `fg`, `string`, `success`.
 `[style]` keys: `leather`, `leather-edge`, `cover`, `parchment`, `parchment-edge`,
 `page-stack`, `ink`, `ink-faded`, `rubric`, `gold`, `sigil-size`.
 
-### recall, recall-constellation, constellation, index-cards, devices, matrix, chart, terminal, gauge, gem-grid, gem-log, gem-ladder, trade-themes, notifications
+### recall, recall-constellation, constellation, index-cards, devices, matrix, chart, terminal, gauge, gem-grid, gem-log, gem-ladder, trade-themes, notifications, pipeline, repo-tree
 
-Fourteen layouts that share a dark text column on the left: owner, name with
+Sixteen layouts that share a dark text column on the left: owner, name with
 `name_accent` in a gradient, headline, description and footer. Each draws something
 different on the right.
 
@@ -128,6 +128,12 @@ different on the right.
   muted, value }`, its colours as CSS values.
 - **notifications** stacks up to three phone-style alerts, each `{ icon, app, time,
   title, body }`.
+- **pipeline** draws `pipelines`, each `{ label, steps }` with steps `{ title, detail }`:
+  the first two as columns of checked steps, the first step of each as its trigger, and
+  a third as a strip of chips along the bottom.
+- **repo-tree** lists `tree_root` and up to nine `tree` items, each a path string or
+  `{ path, note, mark }`; `mark = true` highlights a row. Plain strings render too, so
+  a devices or matrix content file also works here.
 
 The two constellation layouts scatter their stars from a fixed `seed` (a whole
 number), so a render is repeatable; set it in the content file to try another

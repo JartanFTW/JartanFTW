@@ -1,0 +1,67 @@
+{% extends "_split.html" %}
+{# pipeline layout: up to two pipelines as columns of checked steps, and a third as a
+   strip across the bottom. Fields are in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .panel { gap: 22px; }
+  .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .label { font: 16px "DejaVu Sans Mono", monospace; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+  .step {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: #161b22;
+    border: 1.5px solid var(--line);
+  }
+  .step .tick { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--success); color: var(--bg); font-weight: bold; font-size: 16px; }
+  .step:first-of-type { border-color: var(--accent-to); }
+  .step:first-of-type .tick { background: var(--accent-to); }
+  .step b { display: block; font: bold 20px "Noto Sans", sans-serif; white-space: nowrap; overflow: hidden; }
+  .step small { display: block; font: 15px "DejaVu Sans Mono", monospace; color: var(--muted); white-space: nowrap; overflow: hidden; }
+  .link { height: 20px; margin-left: 27px; border-left: 3px dashed var(--accent-from); opacity: 0.7; }
+  .strip .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .strip .chip { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px;
+    background: #161b22; border: 1.5px solid var(--line); font: bold 17px "Noto Sans", sans-serif; }
+  .strip .chip::before { content: "✓"; color: var(--success); }
+{% endblock %}
+
+{% macro column(pipeline) -%}
+  <div>
+    <div class="label">{{ pipeline.label }}</div>
+    {% for step in (pipeline.steps or [])[:4] %}
+      {% if not loop.first %}<div class="link"></div>{% endif %}
+      <div class="step"><span class="tick">✓</span><div><b class="fit">{{ step.title }}</b>{% if step.detail %}<small class="fit">{{ step.detail }}</small>{% endif %}</div></div>
+    {% endfor %}
+  </div>
+{%- endmacro %}
+
+{% block art %}
+  {% set lanes = pipelines or [] %}
+  <div class="panel">
+    <div class="columns">{% for pipeline in lanes[:2] %}{{ column(pipeline) }}{% endfor %}</div>
+    {% if lanes | length > 2 %}
+    <div class="strip">
+      <div class="label">{{ lanes[2].label }}</div>
+      <div class="chips">{% for step in lanes[2].steps %}<span class="chip">{{ step.title }}</span>{% endfor %}</div>
+    </div>
+    {% endif %}
+  </div>
+{% endblock %}
