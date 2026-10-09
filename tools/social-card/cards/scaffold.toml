@@ -1,8 +1,10 @@
 layout = "pipeline"
 owner = "Jartan-LLC"
 name = "scaffold"
+headline = "Green on the first push"
 description = "Everything a serious Python project\nneeds, set up and passing on day one."
-chips = ["Dev container", "Quality gate", "Security-first", "CI & releases", "Auto-updates", "AI-ready"]
+chips = ["dev container", "quality gate", "security-first", "CI & releases", "auto-updates", "AI-ready"]
+show_chips = true
 footer = [
   { text = "template" },
   { text = " → ", style = "accent-text" },
