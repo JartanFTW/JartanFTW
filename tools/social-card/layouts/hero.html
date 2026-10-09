@@ -1,0 +1,57 @@
+{% extends "_split.html" %}
+{% from "_macros.html" import check, glyph %}
+{# hero layout: one big glowing icon among sparkles, and an optional checklist in place
+   of the description. Fields and [style] keys are in ../README.md #}
+
+{% block style %}
+  :root {
+    --hero-ink: #f0e6ff;
+    --hero-glow: #a371f7;
+    --hero-glow-far: #6e40c9;
+    --sparkle: #e2d1ff;
+  }
+  {% if checklist %}.text .description { display: none; }{% endif %}
+
+  .halo {
+    position: absolute;
+    left: 700px;
+    top: 80px;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, color-mix(in srgb, var(--hero-glow) 35%, transparent), transparent 65%);
+  }
+  .hero {
+    position: absolute;
+    left: 760px;
+    top: 140px;
+    width: 360px;
+    height: 360px;
+    display: grid;
+    place-items: center;
+    color: var(--hero-ink);
+    filter: drop-shadow(0 0 40px var(--hero-glow)) drop-shadow(0 0 90px var(--hero-glow-far));
+  }
+  .sparkle { position: absolute; fill: var(--sparkle); filter: drop-shadow(0 0 8px var(--hero-glow)); }
+
+  .checklist { position: absolute; left: var(--margin); top: 250px; width: 540px; }
+  .checklist .title { font: 18px "DejaVu Sans Mono", monospace; color: var(--muted); margin-bottom: 10px; }
+  .checklist .item { display: flex; align-items: center; gap: 14px; font: 25px/1.75 "Noto Sans", sans-serif; }
+{% endblock %}
+
+{% block art %}
+  {# Sparkles sit around the icon, clear of the text column: (size, left, top). #}
+  {% set sparkles = [(34, 1080, 110), (18, 1150, 200), (22, 760, 140), (14, 820, 470), (26, 1120, 430), (12, 700, 330), (16, 1000, 520)] %}
+  <div class="halo"></div>
+  {% set hero_icon = (hero.icon if hero) or icon %}
+  {% if hero_icon %}<div class="hero">{{ glyph(hero_icon, 300) }}</div>{% endif %}
+  {% for size, left, top in sparkles %}
+  <svg class="sparkle" width="{{ size }}" height="{{ size }}" viewBox="0 0 20 20" style="left: {{ left }}px; top: {{ top }}px"><path d="M10 0L12.6 7.4L20 10L12.6 12.6L10 20L7.4 12.6L0 10L7.4 7.4Z"/></svg>
+  {% endfor %}
+  {% if checklist %}
+  <div class="checklist">
+    {% if checklist.title %}<div class="title">{{ checklist.title }}</div>{% endif %}
+    {% for item in (checklist['items'] or [])[:5] %}<div class="item">{{ check(26) }}<span class="fit">{{ item }}</span></div>{% endfor %}
+  </div>
+  {% endif %}
+{% endblock %}
