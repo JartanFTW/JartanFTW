@@ -1,0 +1,48 @@
+{% extends "_split.html" %}
+{# before-after layout: a list of chores without the project, and the same list solved
+   with it. Fields are in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .panel { gap: 16px; }
+  .title { font: 18px "DejaVu Sans Mono", monospace; color: var(--muted); text-align: center; }
+  .side { padding: 14px 20px; border-radius: 14px; border: 1.5px solid var(--line); background: #161b22; }
+  .side .label { font: bold 21px "Noto Sans", sans-serif; margin-bottom: 4px; }
+  .side .item { display: flex; align-items: center; gap: 12px; font: 20px/1.8 "Noto Sans", sans-serif; }
+  .side .mark { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+    font: bold 15px sans-serif; color: var(--bg); }
+  .before .mark { background: var(--critical); }
+  .before .item span:last-child { color: var(--muted); }
+  .after { border-color: var(--accent-from); background: color-mix(in srgb, var(--accent-from) 8%, #161b22); }
+  .after .mark { background: var(--success); }
+{% endblock %}
+
+{% macro side(part, cls, mark) -%}
+  <div class="side {{ cls }}">
+    {% if part.label %}<div class="label">{{ part.label }}</div>{% endif %}
+    {% for item in (part['items'] or [])[:5] %}<div class="item"><span class="mark">{{ mark }}</span><span class="fit">{{ item }}</span></div>{% endfor %}
+  </div>
+{%- endmacro %}
+
+{% block art %}
+  {% if before_after %}
+  <div class="panel">
+    {% if before_after.title %}<div class="title">{{ before_after.title }}</div>{% endif %}
+    {{ side(before_after.before, "before", "✕") }}
+    {{ side(before_after.after, "after", "✓") }}
+  </div>
+  {% endif %}
+{% endblock %}

@@ -74,9 +74,9 @@ Footer styles: `muted` (default), `fg`, `string`, `success`.
 `[style]` keys: `leather`, `leather-edge`, `cover`, `parchment`, `parchment-edge`,
 `page-stack`, `ink`, `ink-faded`, `rubric`, `gold`, `sigil-size`.
 
-### recall, recall-constellation, constellation, index-cards, devices, matrix, chart, terminal, gauge, gem-grid, gem-log, gem-ladder, trade-themes, notifications, pipeline, repo-tree, hero
+### recall, recall-constellation, constellation, index-cards, devices, matrix, chart, terminal, gauge, gem-grid, gem-log, gem-ladder, trade-themes, notifications, pipeline, repo-tree, hero, before-after, streak, rune-circle, catalogue, combine
 
-Seventeen layouts that share a dark text column on the left: owner, name with
+Twenty-two layouts that share a dark text column on the left: owner, name with
 `name_accent` in a gradient, headline, description and footer. Each draws something
 different on the right.
 
@@ -137,6 +137,18 @@ different on the right.
 - **hero** sets one big glowing icon among sparkles: `hero.icon`, or the card's `icon`.
   A `checklist = { title, items }` of up to five lines replaces the description.
   `[style]` adds `hero-ink`, `hero-glow`, `hero-glow-far` and `sparkle`.
+- **before-after** sets a list of chores against the same list solved:
+  `before_after = { title, before = { label, items }, after = { label, items } }`, up to
+  five items a side.
+- **streak** shows `streak = { rows }`, each `{ label, status }`, the last of up to six
+  highlighted.
+- **rune-circle** sets up to nine `runes` (or, without them, `chips`) around a magic
+  circle with `hero.icon` (or the card's icon) at its centre. `[style]` adds `rune`,
+  `ring` and `star`.
+- **catalogue** tiles up to eight `catalogue` entries, each `{ name, icon, note }`, in
+  two columns.
+- **combine** shows `combine = { input, modifier, result, tags }`: three `{ icon, label }`
+  slots joined by + and =, with `tags` beneath.
 
 The two constellation layouts scatter their stars from a fixed `seed` (a whole
 number), so a render is repeatable; set it in the content file to try another

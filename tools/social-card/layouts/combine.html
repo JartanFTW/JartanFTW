@@ -1,0 +1,51 @@
+{% extends "_split.html" %}
+{% from "_macros.html" import glyph %}
+{# combine layout: input + modifier = result, as three slots, with tags beneath. Fields
+   are in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .panel { align-items: center; gap: 22px; }
+  .slots { display: grid; grid-template-columns: 130px auto 130px auto 130px; align-items: center; justify-items: center; column-gap: 16px; row-gap: 10px; }
+  .slot { position: relative; width: 130px; height: 130px; border-radius: 18px; display: grid; place-items: center;
+    background: #161b22; border: 2px solid var(--line); color: var(--muted); }
+  .slot.modifier { color: var(--accent-from); }
+  .slot.result { color: var(--fg); border-color: var(--accent-from); background: color-mix(in srgb, var(--accent-from) 14%, #161b22);
+    box-shadow: 0 0 34px color-mix(in srgb, var(--accent-from) 45%, transparent); }
+  .slot.result .sparkle { position: absolute; right: -10px; top: -10px; fill: var(--accent-from); filter: drop-shadow(0 0 6px var(--accent-from)); }
+  .op { font: bold 34px sans-serif; color: var(--muted); }
+  .caption { font: 16px "DejaVu Sans Mono", monospace; color: var(--muted); text-align: center; }
+  .tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; width: 540px; }
+  .tags span { padding: 5px 12px; border-radius: 999px; font: 16px "DejaVu Sans Mono", monospace; color: #d2b8ff;
+    border: 1px solid color-mix(in srgb, var(--accent-from) 50%, transparent); }
+{% endblock %}
+
+{% block art %}
+  {% if combine %}
+  <div class="panel">
+    <div class="slots">
+      {% for part, cls in [(combine.input, "input"), (combine.modifier, "modifier"), (combine.result, "result")] %}
+        {% if not loop.first %}<span class="op">{{ "+" if loop.index == 2 else "=" }}</span>{% endif %}
+        <div class="slot {{ cls }}">{% if part.icon %}{{ glyph(part.icon, 68) }}{% endif %}{% if cls == "result" %}<svg class="sparkle" width="28" height="28" viewBox="0 0 20 20"><path d="M10 0L12.6 7.4L20 10L12.6 12.6L10 20L7.4 12.6L0 10L7.4 7.4Z"/></svg>{% endif %}</div>
+      {% endfor %}
+      {% for part in [combine.input, combine.modifier, combine.result] %}
+        {% if not loop.first %}<span></span>{% endif %}<span class="caption">{{ part.label }}</span>
+      {% endfor %}
+    </div>
+    {% if combine.tags %}<div class="tags">{% for tag in combine.tags %}<span>{{ tag }}</span>{% endfor %}</div>{% endif %}
+  </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "_split.html" %}
+{# streak layout: a run of rows, each with a status, the last one highlighted. Fields
+   are in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .panel { gap: 10px; font-family: "DejaVu Sans Mono", monospace; }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: #161b22;
+    border: 1px solid var(--line);
+    font-size: 20px;
+    color: var(--muted);
+  }
+  .row:not(:last-child) { opacity: 0.6; }
+  .row .label { flex: none; white-space: nowrap; }
+  .row .status { min-width: 0; margin-left: 24px; overflow: hidden; white-space: nowrap; color: var(--success); }
+  .row:last-child {
+    padding: 22px 20px;
+    border: 2px solid var(--accent-from);
+    background: color-mix(in srgb, var(--accent-from) 10%, #161b22);
+    font-size: 23px;
+    color: var(--fg);
+  }
+  .row:last-child .label { font-weight: bold; }
+{% endblock %}
+
+{% block art %}
+  {% if streak %}
+  <div class="panel">
+    {% for row in (streak.rows or [])[-6:] %}<div class="row"><span class="label">{{ row.label }}</span><span class="status fit">{{ row.status }}</span></div>{% endfor %}
+  </div>
+  {% endif %}
+{% endblock %}

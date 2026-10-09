@@ -1,0 +1,77 @@
+{% extends "_split.html" %}
+{% from "_macros.html" import glyph %}
+{# rune-circle layout: names set around a magic circle with a glowing icon at its
+   centre. Fields and [style] keys are in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  :root { --rune: #d2b8ff; --ring: var(--accent-from); --star: var(--accent-to); }
+  .panel { padding: 0; }
+  .circle { position: absolute; inset: 0; }
+  .circle .ring { fill: none; stroke: var(--ring); stroke-width: 2; opacity: 0.8; filter: drop-shadow(0 0 6px var(--ring)); }
+  .circle .tick { stroke: var(--ring); stroke-width: 2; opacity: 0.6; }
+  .circle .star { fill: none; stroke: var(--star); stroke-width: 1.5; opacity: 0.55; }
+  .rune { position: absolute; white-space: nowrap; font: bold 15px "DejaVu Sans Mono", monospace; color: var(--rune); }
+  .core { position: absolute; width: 100px; height: 100px; transform: translate(-50%, -50%); display: grid; place-items: center;
+    color: var(--fg); filter: drop-shadow(0 0 24px var(--ring)); }
+{% endblock %}
+
+{% block art %}
+  {% set center_icon = (hero.icon if hero) or icon %}
+  <div class="panel">
+    <svg class="circle" width="600" height="560"></svg>
+    {% for name in (runes or chips or [])[:9] %}<span class="rune">{{ name }}</span>{% endfor %}
+    <div class="core">{% if center_icon %}{{ glyph(center_icon, 92) }}{% endif %}</div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  // The circle is kept small so a long name beside it still fits the panel.
+  // Draw the circle, then set each name just outside it, anchored on the side it sits
+  // so names on the left and right grow away from the ring rather than over it.
+  const C = { x: 300, y: 280, outer: 128, inner: 115, names: 146 };
+  const AREA = { left: 14, right: 586, top: 10, bottom: 550 };
+
+  function drawCircle() {
+    const runes = [...document.querySelectorAll(".rune")];
+    const at = (deg, r) => [C.x + r * Math.cos((deg * Math.PI) / 180), C.y + r * Math.sin((deg * Math.PI) / 180)];
+    const n = Math.max(runes.length, 3);
+    let svg = `<circle class="ring" cx="${C.x}" cy="${C.y}" r="${C.outer}"/><circle class="ring" cx="${C.x}" cy="${C.y}" r="${C.inner}"/>`;
+    for (let deg = 0; deg < 360; deg += 10) {
+      const [x0, y0] = at(deg, C.inner), [x1, y1] = at(deg, C.outer);
+      svg += `<line class="tick" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`;
+    }
+    const step = n % 2 ? Math.floor(n / 2) : n / 2 - 1;  // a star that visits every point
+    const star = Array.from({ length: n }, (_, i) => at(-90 + ((i * step) % n) * (360 / n), C.inner).join(",")).join(" ");
+    svg += `<polygon class="star" points="${star}"/>`;
+    document.querySelector(".circle").innerHTML = svg;
+
+    runes.forEach((el, i) => {
+      const deg = -90 + i * (360 / runes.length);
+      const [x, y] = at(deg, C.names);
+      const { width, height } = el.getBoundingClientRect();
+      const dx = Math.cos((deg * Math.PI) / 180);
+      const left = dx > 0.3 ? x : dx < -0.3 ? x - width : x - width / 2;
+      el.style.left = `${Math.min(Math.max(left, AREA.left), AREA.right - width)}px`;
+      el.style.top = `${Math.min(Math.max(y - height / 2, AREA.top), AREA.bottom - height)}px`;
+    });
+    const core = document.querySelector(".core");
+    core.style.left = `${C.x}px`;
+    core.style.top = `${C.y}px`;
+  }
+
+  window.cardReady = document.fonts.ready.then(() => { fitText(); drawCircle(); });
+{% endblock %}

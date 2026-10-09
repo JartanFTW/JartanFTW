@@ -1,0 +1,45 @@
+{% extends "_split.html" %}
+{% from "_macros.html" import glyph %}
+{# catalogue layout: a tile per entry, each with an icon, a name and a note, in two
+   columns. Fields are in ../README.md #}
+
+{% block style %}
+  .panel {
+    position: absolute;
+    left: 628px;
+    top: 40px;
+    width: 600px;
+    height: 560px;
+    padding: 26px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgb(13 17 23 / 85%);
+    border: 2px solid var(--line);
+    border-radius: 18px;
+  }
+  .panel { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: center; }
+  .tile {
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #161b22;
+    border: 1.5px solid var(--line);
+    min-width: 0;
+  }
+  .tile .glyph { justify-self: center; color: var(--accent-from); }
+  .tile .name { font: bold 17px "DejaVu Sans Mono", monospace; white-space: nowrap; overflow: hidden; }
+  .tile .note { font: 16px "Noto Sans", sans-serif; color: var(--muted); white-space: nowrap; overflow: hidden; }
+  .tile:last-child:nth-child(odd) { grid-column: span 2; }
+{% endblock %}
+
+{% block art %}
+  <div class="panel">
+    {% for entry in (catalogue or [])[:8] %}
+    <div class="tile">{% if entry.icon %}{{ glyph(entry.icon, 30) }}{% else %}<span></span>{% endif %}<div><div class="name fit">{{ entry.name }}</div>{% if entry.note %}<div class="note fit">{{ entry.note }}</div>{% endif %}</div></div>
+    {% endfor %}
+  </div>
+{% endblock %}
