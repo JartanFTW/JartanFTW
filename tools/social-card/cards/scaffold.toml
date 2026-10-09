@@ -1,14 +1,68 @@
+layout = "pipeline"
 owner = "Jartan-LLC"
 name = "scaffold"
-description = "Everything a serious Python project needs,\nset up and passing on day one."
+description = "Everything a serious Python project\nneeds, set up and passing on day one."
 chips = ["Dev container", "Quality gate", "Security-first", "CI & releases", "Auto-updates", "AI-ready"]
 footer = [
-  { text = "$ make check  " },
-  { text = "✓ passing", style = "success" },
+  { text = "template" },
+  { text = " → ", style = "accent-text" },
+  { text = "/onboard" },
+  { text = " → ", style = "accent-text" },
+  { text = "make check", style = "fg" },
 ]
 icon = "scaffold.svg"  # Pinhead Map Icons, CC0
+
+# pipeline: the template's real workflow triggers (ci.yml, release.yml, publish-*.yml
+# and the Monday crons in ci, scorecard, dependency-audit and external-link-check)
+pipelines = [
+  { label = "every pull request", steps = [
+    { title = "pull request", detail = "opened" },
+    { title = "CI", detail = "lint · types · tests" },
+    { title = "build · audit · docs", detail = "same as make check" },
+    { title = "Dependabot", detail = "minor/patch merged" },
+  ] },
+  { label = "every version tag", steps = [
+    { title = "v1.2.0", detail = "tag pushed" },
+    { title = "GitHub Release", detail = "notes + artifacts" },
+    { title = "PyPI", detail = "token-free publish" },
+    { title = "ghcr.io", detail = "multi-arch images" },
+  ] },
+  { label = "every monday", steps = [
+    { title = "CI" }, { title = "Scorecard" }, { title = "audit" }, { title = "link check" },
+  ] },
+]
+
+# repo-tree
+tree_root = "scaffold/"
+tree = [
+  { path = ".devcontainer/", note = "tools preinstalled" },
+  { path = ".github/workflows/", note = "pinned, hardened CI" },
+  { path = ".github/dependabot.yml", note = "weekly, auto-merged" },
+  { path = "Makefile", note = "make check = CI" },
+  { path = "CLAUDE.md", note = "AI-ready rules" },
+  { path = "src/app/", note = "your code", mark = true },
+  { path = "tests/", note = "already passing" },
+]
+
+# terminal: the steps of make check (Makefile)
+[run]
+command = "make check"
+steps = [
+  { name = "lint", result = "ruff · codespell · shellcheck" },
+  { name = "typecheck", result = "pyright, strict" },
+  { name = "test", result = "unit suite, as CI runs it" },
+  { name = "build", result = "sdist + wheel" },
+  { name = "audit", result = "dependency vulnerabilities" },
+  { name = "docs", result = "warnings as errors" },
+]
+outcome_label = "result"
+outcome = [{ text = "green on the " }, { text = "first push", style = "accent-text" }]
+outcome_detail = "the same checks CI runs"
 
 [style]
 tile-from = "#1a7f37"
 tile-to = "#1f6feb"
 tile-size = "300px"
+accent-from = "#3fb950"
+accent-to = "#58a6ff"
+glow = "#0f2a1a"
