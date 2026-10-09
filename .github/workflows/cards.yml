@@ -21,7 +21,7 @@ jobs:
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: stats
-          options: username=${{ github.repository_owner }}&show_icons=true&theme=darcula&rank_icon=default
+          options: username=${{ github.repository_owner }}&show_icons=true&theme=darcula&rank_icon=default&ring_color=F5C518
           path: profile/stats.svg
           token: ${{ secrets.PAT }}
 

@@ -91,6 +91,7 @@ As does fine dust thrown up against the wind<!--QUOTE_TEXT_END--></i></p>
 
 <p align="center">
   <img src="./profile/streak.svg" alt="GitHub Streak" />
+  <img src="./profile/merlin-building.png" alt="Currently building Merlin: one website foundation, forked per site" width="320" />
 </p>
 
 ---

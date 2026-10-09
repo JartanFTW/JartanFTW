@@ -1,0 +1,9 @@
+# The "currently building" plate beside the streak card on the profile README; Merlin
+# itself is private, so this says only what its README calls public.
+layout = "now-building"
+size = [640, 390]
+overline = "Currently building"
+name = "Merlin"
+pitch = "One website foundation, forked per site. Forks keep pulling Core updates, and rebrand by editing one file."
+tags = ["Astro", "React", "Tailwind", "FastAPI", "Postgres"]
+facts = ["454 components", "8 backend modules"]
