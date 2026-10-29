@@ -20,8 +20,8 @@
 
 <h3 align="center">📜 Quote of the Day 📜 </h3>
 
-<p align="center"><i><!--QUOTE_TEXT_START-->All great sin archetypes can be seen as different perceptual distortions of the same underlying fixation upon unified awareness<!--QUOTE_TEXT_END--></i></p>
-<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Jonathan Carter<!--QUOTE_AUTHOR_END--></sub></p>
+<p align="center"><i><!--QUOTE_TEXT_START-->To err is human; to forgive, divine.<!--QUOTE_TEXT_END--></i></p>
+<p align="center"><sub><!--QUOTE_AUTHOR_START-->— Alexander Pope<!--QUOTE_AUTHOR_END--></sub></p>
 
 ---
 
