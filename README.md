@@ -17,8 +17,8 @@
 </p>
 
 <p align="center">
-🤝 I want to build something big that helps a lot of people.
-  If you're building toward that too, or need help with yours, let's talk. 🤝
+🤝🤝 I want to build something big that helps a lot of people.
+  If you're building toward that too, let's talk. 🤝🤝
 </p>
 
 ---
