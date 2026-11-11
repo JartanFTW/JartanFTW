@@ -124,8 +124,6 @@
 <p align="center">• The principles I'm obsessed with are (WIP): flexible and extensible architecture, clean separation of concerns, supply chain hardening, infrastructure robustness...</p>
 <p align="center">...more to come as I think about it</p>
 
-![](https://komarev.com/ghpvc/?username=JartanFTW)
-
 <!--
 **JartanFTW/JartanFTW** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
