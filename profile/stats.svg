@@ -9,7 +9,7 @@
         aria-labelledby="descId"
       >
         <title id="titleId">Jonathan Carter's GitHub Stats, Rank: A</title>
-        <desc id="descId">Total Stars Earned: 33, Total Commits  (last year) : 1267, Total PRs: 1176, Total Issues: 1279, Contributed to (last year): 43</desc>
+        <desc id="descId">Total Stars Earned: 33, Total Commits  (last year) : 1323, Total PRs: 1216, Total Issues: 1332, Contributed to (last year): 43</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -73,7 +73,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 58.93814106256283;
+        stroke-dashoffset: 58.75855681684991;
       }
     }
   
