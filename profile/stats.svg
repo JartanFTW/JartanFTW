@@ -9,7 +9,7 @@
         aria-labelledby="descId"
       >
         <title id="titleId">Jonathan Carter's GitHub Stats, Rank: A</title>
-        <desc id="descId">Total Stars Earned: 33, Total Commits  (last year) : 1380, Total PRs: 1295, Total Issues: 1410, Contributed to (last year): 43</desc>
+        <desc id="descId">Total Stars Earned: 33, Total Commits  (last year) : 1380, Total PRs: 1295, Total Issues: 1411, Contributed to (last year): 43</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
